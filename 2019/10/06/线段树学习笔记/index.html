@@ -55,18 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="SYH&apos;Blog">
-<meta name="keywords" content="学习笔记">
+  <meta name="description" content="线段树是一种基于分治思想的二叉树结构，用于在区间上的信息统计。与按照二进制位进行区间划分的树状数组相比，线段树是一种更加通用的数据结构；">
+<meta name="keywords" content="学习笔记,线段树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【学习笔记】线段树(持续更新ing)">
 <meta property="og:url" content="http://yoursite.com/2019/10/06/线段树学习笔记/index.html">
 <meta property="og:site_name" content="WYCTSTF">
-<meta property="og:description" content="SYH&apos;Blog">
+<meta property="og:description" content="线段树是一种基于分治思想的二叉树结构，用于在区间上的信息统计。与按照二进制位进行区间划分的树状数组相比，线段树是一种更加通用的数据结构；">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-06T07:52:30.189Z">
+<meta property="og:updated_time" content="2019-10-06T08:24:38.714Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【学习笔记】线段树(持续更新ing)">
-<meta name="twitter:description" content="SYH&apos;Blog">
+<meta name="twitter:description" content="线段树是一种基于分治思想的二叉树结构，用于在区间上的信息统计。与按照二进制位进行区间划分的树状数组相比，线段树是一种更加通用的数据结构；">
   <link rel="canonical" href="http://yoursite.com/2019/10/06/线段树学习笔记/">
 
 
@@ -261,7 +261,7 @@
                 
               
 
-              <time title="创建时间：2019-10-06 13:52:25 / 修改时间：15:52:30" itemprop="dateCreated datePublished" datetime="2019-10-06T13:52:25+08:00">2019-10-06</time>
+              <time title="创建时间：2019-10-06 13:52:25 / 修改时间：16:24:38" itemprop="dateCreated datePublished" datetime="2019-10-06T13:52:25+08:00">2019-10-06</time>
             </span>
           
             
@@ -280,7 +280,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <blockquote>
+<p>线段树是一种基于分治思想的二叉树结构，用于在区间上的信息统计。与按照二进制位进行区间划分的树状数组相比，线段树是一种更加通用的数据结构；</p>
+</blockquote>
+<a id="more"></a>
+<ol>
+<li>线段树的每一个节点都代表一个区间</li>
+<li>线段树具有唯一的根节点，代表的区间是整个统计范围([1,N])</li>
+<li>线段树的每个叶节点都代表一个长度为1的元区间[x,x]</li>
+<li>对于每个<strong>内部节点[l,r],它的左儿子节点是[l,mid]，右儿子节点是[mid+1,r]，其中mid为floor((l+r)/2)</strong></li>
+</ol>
+<p>![]D:\blog\blog\themes\next\source\images\SegmentTree.png)</p>
+<h3 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h3><p>《算法竞赛进阶指南》</p>
+<p><a href="https://www.luogu.org/blog/pks-LOVING/senior-data-structure-qian-tan-xian-duan-shu-segment-tree" target="_blank" rel="noopener">洛谷日报#4 浅谈线段树</a></p>
+
     </div>
 
     
@@ -296,6 +309,8 @@
           <div class="post-tags">
             
               <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+            
+              <a href="/tags/线段树/" rel="tag"># 线段树</a>
             
           </div>
         
@@ -359,6 +374,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料："><span class="nav-number">1.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
@@ -402,7 +419,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
