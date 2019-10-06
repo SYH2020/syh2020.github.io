@@ -130,7 +130,7 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">回首向来萧瑟处，也无风雨也无晴</p>
+        <h1 class="site-subtitle" itemprop="description">回首向来萧瑟处，也无风雨也无晴</h1>
       
   </div>
 
@@ -228,6 +228,88 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/06/LGP1120小木棍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="SYH">
+      <meta itemprop="description" content="SYH'Blog">
+      <meta itemprop="image" content="/images\header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYCTSTF">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/06/LGP1120小木棍/" class="post-title-link" itemprop="url">【LG P1120】小木棍</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-06 00:00:00 / 修改时间：13:49:51" itemprop="dateCreated datePublished" datetime="2019-10-06T00:00:00+08:00">2019-10-06</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>给定n个长度不等的小木棍，由一些数量位置长度相等的木棍砍得，问原木棍长度最小可能值，需要手动忽略长度a[i]&gt;50的数据</p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><blockquote>
+<p><a href="https://www.luogu.org/problem/P1120" target="_blank" rel="noopener">[洛谷 P1120] 小木棍</a></p>
+</blockquote>
+<h3 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h3><p>一道经典的深搜剪枝习题</p>
+<p>以最小长度为目标深搜，搜索满足条件的最小解</p>
+<p>剪枝：</p>
+<ul>
+<li>木棍的最小长度肯定大于小木棍的最大的一个长度，肯定小于所有小木棍长度的总和</li>
+<li>原始长度只需要枚举到sum/2，再大就只有一种情况就是sum</li>
+<li>可以对小木棍长度从大到小排序方便优化选取的过程(感性理解)</li>
+</ul>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/* P1120 小木棍 */</span><br><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int n, m, a[70], nxt[70], cnt, sum, len;</span><br><span class="line">bool used[70], ok;</span><br><span class="line"></span><br><span class="line">inline int read()&#123;</span><br><span class="line">    int x=0,f=1;char ch=getchar();</span><br><span class="line">    while(!isdigit(ch)) f=(ch==&apos;-&apos;)?-1:1,ch=getchar();</span><br><span class="line">    while(isdigit(ch)) x=x*10+(ch-&apos;0&apos;),ch=getchar();</span><br><span class="line">    return x*f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void dfs(int k, int last, int rest)</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    if (!rest)</span><br><span class="line">    &#123;</span><br><span class="line">        if (k == m)</span><br><span class="line">        &#123;</span><br><span class="line">            ok = 1;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        for (i = 1; i &lt;= cnt; i++)</span><br><span class="line">            if (!used[i])</span><br><span class="line">                break;</span><br><span class="line">        used[i] = 1;</span><br><span class="line">        dfs(k + 1, i, len - a[i]);</span><br><span class="line">        used[i] = 0;</span><br><span class="line">        if (ok)</span><br><span class="line">            return;</span><br><span class="line">    &#125;</span><br><span class="line">    int l = last + 1, r = cnt, mid;</span><br><span class="line">    while (l &lt; r)</span><br><span class="line">    &#123;</span><br><span class="line">        mid = (l + r) &gt;&gt; 1;</span><br><span class="line">        if (a[mid] &lt;= rest)</span><br><span class="line">            r = mid;</span><br><span class="line">        else</span><br><span class="line">            l = mid + 1;</span><br><span class="line">    &#125;</span><br><span class="line">    for (i = l; i &lt;= cnt; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if (!used[i])</span><br><span class="line">        &#123;</span><br><span class="line">            used[i] = 1;</span><br><span class="line">            dfs(k, i, rest - a[i]);</span><br><span class="line">            used[i] = 0;</span><br><span class="line">            if (ok)</span><br><span class="line">                return;</span><br><span class="line">            if (rest == a[i] || rest == len)</span><br><span class="line">                return;</span><br><span class="line">            i = nxt[i];</span><br><span class="line">            if (i == cnt)</span><br><span class="line">                return;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    n = read();</span><br><span class="line">    int d;</span><br><span class="line">    for (int i = 1; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        d = read();</span><br><span class="line">        if (d &gt; 50)</span><br><span class="line">            continue;</span><br><span class="line">        a[++cnt] = d;</span><br><span class="line">        sum += d;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(a + 1, a + cnt + 1, greater&lt;int&gt;());</span><br><span class="line">    nxt[cnt] = cnt;</span><br><span class="line">    for (int i = cnt - 1; i &gt; 0; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        if (a[i] == a[i + 1])</span><br><span class="line">            nxt[i] = nxt[i + 1];</span><br><span class="line">        else</span><br><span class="line">            nxt[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    for (len = a[1]; len &lt;= sum / 2; len++)</span><br><span class="line">    &#123;</span><br><span class="line">        if (sum % len != 0)</span><br><span class="line">            continue;</span><br><span class="line">        m = sum / len;</span><br><span class="line">        ok = 0;</span><br><span class="line">        used[1] = 1;</span><br><span class="line">        dfs(1, 1, len - a[1]);</span><br><span class="line">        used[1] = 0;</span><br><span class="line">        if (ok)</span><br><span class="line">        &#123;</span><br><span class="line">            cout&lt;&lt;len;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;sum;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/04/CF1206Div.2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -240,11 +322,11 @@
       <meta itemprop="name" content="WYCTSTF">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
             
             <a href="/2019/10/04/CF1206Div.2/" class="post-title-link" itemprop="url">Codeforces Round 580(Div.2)</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -329,11 +411,11 @@
       <meta itemprop="name" content="WYCTSTF">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
             
             <a href="/2019/10/04/CSP初赛/" class="post-title-link" itemprop="url">CSP初赛复习知识点整理</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -429,11 +511,11 @@
       <meta itemprop="name" content="WYCTSTF">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
             
             <a href="/2019/10/04/TwoPoints/" class="post-title-link" itemprop="url">二分答案试题泛做</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -529,11 +611,11 @@
       <meta itemprop="name" content="WYCTSTF">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
             
             <a href="/2019/10/03/Dijkstra/" class="post-title-link" itemprop="url">【学习笔记】Dijkstra</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -616,11 +698,11 @@
       <meta itemprop="name" content="WYCTSTF">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
             
             <a href="/2019/10/02/CSPS1/" class="post-title-link" itemprop="url">CSP-S1大题备战</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -716,11 +798,11 @@
       <meta itemprop="name" content="WYCTSTF">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
             
             <a href="/2019/10/02/test/" class="post-title-link" itemprop="url">新的博客！</a>
           
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -836,7 +918,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
