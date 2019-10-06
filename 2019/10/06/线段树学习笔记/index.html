@@ -64,7 +64,7 @@
 <meta property="og:description" content="线段树是一种基于分治思想的二叉树结构，用于在区间上的信息统计。与按照二进制位进行区间划分的树状数组相比，线段树是一种更加通用的数据结构；">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://img2018.cnblogs.com/blog/1576249/201910/1576249-20191006163159275-43821761.png">
-<meta property="og:updated_time" content="2019-10-06T14:40:54.754Z">
+<meta property="og:updated_time" content="2019-10-06T14:58:32.150Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【学习笔记】线段树(持续更新ing)">
 <meta name="twitter:description" content="线段树是一种基于分治思想的二叉树结构，用于在区间上的信息统计。与按照二进制位进行区间划分的树状数组相比，线段树是一种更加通用的数据结构；">
@@ -263,7 +263,7 @@
                 
               
 
-              <time title="创建时间：2019-10-06 13:52:25 / 修改时间：22:40:54" itemprop="dateCreated datePublished" datetime="2019-10-06T13:52:25+08:00">2019-10-06</time>
+              <time title="创建时间：2019-10-06 13:52:25 / 修改时间：22:58:32" itemprop="dateCreated datePublished" datetime="2019-10-06T13:52:25+08:00">2019-10-06</time>
             </span>
           
             
@@ -304,8 +304,21 @@
 <li>线段树具有唯一的根节点，代表的区间是整个统计范围([1,N])</li>
 <li>线段树的每个叶节点都代表一个长度为1的元区间[x,x]</li>
 <li>对于每个<strong>内部节点[l,r],它的左儿子节点是[l,mid]，右儿子节点是[mid+1,r]，其中mid为floor((l+r)/2)</strong></li>
+<li>使用线段树统计，必须满足信息分配原理<ul>
+<li>满足区间加法：<ul>
+<li>区间求和</li>
+<li>区间最大公因数</li>
+<li>区间最值</li>
+</ul>
+</li>
+<li>不满足：<ul>
+<li>区间众数</li>
+<li>01序列最长连续0<br><img src="https://img2018.cnblogs.com/blog/1576249/201910/1576249-20191006163159275-43821761.png" alt></li>
+</ul>
+</li>
+</ul>
+</li>
 </ol>
-<p><img src="https://img2018.cnblogs.com/blog/1576249/201910/1576249-20191006163159275-43821761.png" alt></p>
 <h2 id="相关操作："><a href="#相关操作：" class="headerlink" title="相关操作："></a>相关操作：</h2><h3 id="建树和维护"><a href="#建树和维护" class="headerlink" title="建树和维护:"></a>建树和维护:</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int ans[N&lt;&lt;2]; // 空间开到4倍大小，因为总共有n*2-1个节点，叶节点还需要支配两个没有意义但有实际作用的节点，一共需要4*n-1个节点</span><br><span class="line">inline int ls(int x)&#123;return x&lt;&lt;1;&#125; // inline 排除无效信息,ls &lt;--&gt; left son</span><br><span class="line">inline int rs(int x)&#123;return x&lt;&lt;1|1;&#125; // 二进制加速</span><br><span class="line">void push_up_sum(int x)&#123; // 维护区间和</span><br><span class="line">    t[x]=t[ls(x)]+t[rs(x)];</span><br><span class="line">&#125;</span><br><span class="line">void push_up_max(int x)&#123; // 维护区间最值</span><br><span class="line">    t[x]=max(t[ls(x)],t[rs(x)]);</span><br><span class="line">&#125;</span><br><span class="line">void build(int x,int l,int r)&#123;</span><br><span class="line">    if(l==r)&#123;ans[x]=a[x];return ;&#125;</span><br><span class="line">    int mid=(l+r)&gt;&gt;1;</span><br><span class="line">    // 向下递归建树</span><br><span class="line">    build(ls(x),l,mid);</span><br><span class="line">    build(rs(x),mid+1,r);</span><br><span class="line">    // 回溯时通过子节点向上维护父亲节点</span><br><span class="line">    push_up_max(x);</span><br><span class="line">    push_up_sum(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="单点修改："><a href="#单点修改：" class="headerlink" title="单点修改："></a>单点修改：</h3><p>形如一条”C x v”的指令，表示把a[x]的值修改为y;</p>
