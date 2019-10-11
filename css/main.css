@@ -156,7 +156,7 @@ body {
 }
 body {
   background: #eee;
-  color: #555;
+  color: #255;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 1em;
   line-height: 2;
@@ -205,15 +205,15 @@ span.exturl {
   overflow-wrap: break-word;
   word-wrap: break-word;
   border-bottom: 1px solid #999;
-  color: #555;
+  color: #255;
   outline: none;
   text-decoration: none;
   cursor: pointer;
 }
 a:hover,
 span.exturl:hover {
-  border-bottom-color: #222;
-  color: #222;
+  border-bottom-color: #495a80;
+  color: #495a80;
 }
 iframe,
 img,
@@ -296,9 +296,9 @@ td {
 }
 .btn {
   background: #fff;
-  border: 2px solid #555;
+  border: 2px solid #255;
   border-radius: 2px;
-  color: #555;
+  color: #255;
   display: inline-block;
   font-size: 0.875em;
   line-height: 2;
@@ -310,8 +310,8 @@ td {
   transition-property: background-color;
 }
 .btn:hover {
-  background: #222;
-  border-color: #222;
+  background: #495a80;
+  border-color: #495a80;
   color: #fff;
 }
 .btn + .btn {
@@ -428,7 +428,7 @@ code {
   word-wrap: break-word;
   background: #eee;
   border-radius: 3px;
-  color: #555;
+  color: #255;
   padding: 2px 4px;
 }
 pre {
@@ -724,7 +724,7 @@ pre .javascript .function {
 }
 .post-body .tabs ul.nav-tabs li.tab.active a,
 .tabs-comment ul.nav-tabs li.tab.active a {
-  color: #555;
+  color: #255;
   cursor: default;
 }
 .post-body .tabs .tab-content .tab-pane,
@@ -872,7 +872,7 @@ pre .javascript .function {
 .pagination .prev:hover,
 .pagination .next:hover,
 .pagination .page-number:hover {
-  border-top-color: #222;
+  border-top-color: #495a80;
 }
 .pagination .space {
   margin: 0;
@@ -904,7 +904,7 @@ pre .javascript .function {
   .pagination .prev:hover,
   .pagination .next:hover,
   .pagination .page-number:hover {
-    border-bottom-color: #222;
+    border-bottom-color: #495a80;
   }
 }
 .comments {
@@ -921,8 +921,8 @@ pre .javascript .function {
   margin: 0.1em 0.2em;
 }
 .comment-button-group .comment-button.active {
-  background: #222;
-  border-color: #222;
+  background: #495a80;
+  border-color: #495a80;
   color: #fff;
 }
 .comment-position {
@@ -980,7 +980,7 @@ pre .javascript .function {
   }
 }
 .headband {
-  background: #222;
+  background: #495a80;
   height: 3px;
 }
 .site-meta {
@@ -993,7 +993,7 @@ pre .javascript .function {
   }
 }
 .brand {
-  background: #222;
+  background: #495a80;
   border-bottom: none;
   color: #fff;
   display: inline-block;
@@ -1052,7 +1052,7 @@ pre .javascript .function {
   width: 22px;
 }
 .site-nav-toggle .toggle .toggle-line {
-  background: #555;
+  background: #255;
   border-radius: 1px;
 }
 .site-nav {
@@ -1123,7 +1123,7 @@ pre .javascript .function {
   opacity: 0;
 }
 .sidebar {
-  background: #222;
+  background: #495a80;
   bottom: 0;
   box-shadow: inset 0 2px 6px #000;
   position: fixed;
@@ -1132,7 +1132,7 @@ pre .javascript .function {
 }
 .sidebar a,
 .sidebar span.exturl {
-  border-bottom-color: #555;
+  border-bottom-color: #255;
   color: #999;
 }
 .sidebar a:hover,
@@ -1178,7 +1178,7 @@ pre .javascript .function {
   border-radius: 50%;
 }
 .site-author-name {
-  color: #222;
+  color: #495a80;
   font-weight: 600;
   margin: 0;
   text-align: center;
@@ -1194,7 +1194,7 @@ pre .javascript .function {
 }
 .links-of-author a,
 .links-of-author span.exturl {
-  border-bottom-color: #555;
+  border-bottom-color: #255;
   display: inline-block;
   font-size: 0.8125em;
   margin-bottom: 10px;
@@ -1203,7 +1203,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffbbd4;
+  background: #259c9c;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1291,7 +1291,7 @@ pre .javascript .function {
 }
 .sidebar-nav li {
   border-bottom: 1px solid transparent;
-  color: #555;
+  color: #255;
   cursor: pointer;
   display: inline-block;
   font-size: 0.875em;
@@ -1316,7 +1316,7 @@ pre .javascript .function {
   display: block;
 }
 .sidebar-toggle {
-  background: #222;
+  background: #495a80;
   bottom: 45px;
   cursor: pointer;
   height: 14px;
@@ -1518,7 +1518,7 @@ pre .javascript .function {
   }
 }
 .back-to-top {
-  background: #222;
+  background: #495a80;
   bottom: -100px;
   box-sizing: border-box;
   color: #fff;
@@ -1676,7 +1676,7 @@ pre .javascript .function {
   border-bottom-color: #666;
 }
 .posts-collapse .post-header:hover::before {
-  background: #222;
+  background: #495a80;
 }
 .posts-collapse .post-meta {
   display: inline;
@@ -1840,7 +1840,7 @@ pre .javascript .function {
 }
 .posts-expand .post-title-link {
   border-bottom: none;
-  color: #555;
+  color: #255;
   display: inline-block;
   position: relative;
   vertical-align: top;
@@ -1919,7 +1919,7 @@ pre .javascript .function {
 }
 .post-nav-item a {
   border-bottom: none;
-  color: #555;
+  color: #255;
   display: block;
   font-size: 0.875em;
   line-height: 1.6;
@@ -1927,7 +1927,7 @@ pre .javascript .function {
 }
 .post-nav-item a:hover {
   border-bottom: none;
-  color: #222;
+  color: #495a80;
 }
 .post-nav-item a:active {
   top: 2px;
@@ -2034,11 +2034,11 @@ pre .javascript .function {
   padding: 0;
 }
 #event-list hr {
-  background: #222;
+  background: #495a80;
   margin: 20px 0 45px 0;
 }
 #event-list hr::after {
-  background: #222;
+  background: #495a80;
   color: #fff;
   content: 'NOW';
   display: inline-block;
@@ -2110,7 +2110,7 @@ pre .javascript .function {
   color: #dfdfdf;
 }
 #event-list li.event-now {
-  background: #222;
+  background: #495a80;
   color: #fff;
   padding: 15px 0 15px 10px;
 }
@@ -2122,7 +2122,7 @@ pre .javascript .function {
   color: #fff !important;
 }
 #event-list li.event-future {
-  background: #222;
+  background: #495a80;
   color: #fff;
   padding: 15px 0 15px 10px;
 }
@@ -2199,7 +2199,7 @@ ul.breadcrumb li + li:last-child {
   margin: 10px;
 }
 .tag-cloud a:hover {
-  color: #222 !important;
+  color: #495a80 !important;
 }
 .header {
   margin: 0 auto;
@@ -2310,7 +2310,7 @@ ul.breadcrumb li + li:last-child {
   position: relative;
 }
 .site-meta {
-  background: #222;
+  background: #495a80;
   color: #fff;
   padding: 20px 0;
 }
@@ -2438,19 +2438,19 @@ ul.breadcrumb li + li:last-child {
 }
 .sidebar a,
 .sidebar span.exturl {
-  color: #555;
+  color: #255;
 }
 .sidebar a:hover,
 .sidebar span.exturl:hover {
-  border-bottom-color: #222;
-  color: #222;
+  border-bottom-color: #495a80;
+  color: #495a80;
 }
 .sidebar-inner {
   background: #fff;
   border-radius: initial;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
   box-sizing: border-box;
-  color: #555;
+  color: #255;
   width: 240px;
   opacity: 0;
 }
