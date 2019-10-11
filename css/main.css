@@ -156,7 +156,7 @@ body {
 }
 body {
   background: #eee;
-  color: #555;
+  color: #fd966a;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 1em;
   line-height: 2;
@@ -296,9 +296,9 @@ td {
 }
 .btn {
   background: #fff;
-  border: 2px solid #555;
+  border: 2px solid #fd966a;
   border-radius: 2px;
-  color: #555;
+  color: #fd966a;
   display: inline-block;
   font-size: 0.875em;
   line-height: 2;
@@ -1052,7 +1052,7 @@ pre .javascript .function {
   width: 22px;
 }
 .site-nav-toggle .toggle .toggle-line {
-  background: #555;
+  background: #fd966a;
   border-radius: 1px;
 }
 .site-nav {
@@ -1203,7 +1203,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #602fff;
+  background: #18af13;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2450,7 +2450,7 @@ ul.breadcrumb li + li:last-child {
   border-radius: initial;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
   box-sizing: border-box;
-  color: #555;
+  color: #fd966a;
   width: 240px;
   opacity: 0;
 }
