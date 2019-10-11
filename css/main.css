@@ -205,7 +205,7 @@ span.exturl {
   overflow-wrap: break-word;
   word-wrap: break-word;
   border-bottom: 1px solid #999;
-  color: #fd966a;
+  color: #555;
   outline: none;
   text-decoration: none;
   cursor: pointer;
@@ -724,7 +724,7 @@ pre .javascript .function {
 }
 .post-body .tabs ul.nav-tabs li.tab.active a,
 .tabs-comment ul.nav-tabs li.tab.active a {
-  color: #fd966a;
+  color: #555;
   cursor: default;
 }
 .post-body .tabs .tab-content .tab-pane,
@@ -1203,7 +1203,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #3429d2;
+  background: #c8ff01;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1919,7 +1919,7 @@ pre .javascript .function {
 }
 .post-nav-item a {
   border-bottom: none;
-  color: #fd966a;
+  color: #555;
   display: block;
   font-size: 0.875em;
   line-height: 1.6;
