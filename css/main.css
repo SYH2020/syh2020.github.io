@@ -212,8 +212,8 @@ span.exturl {
 }
 a:hover,
 span.exturl:hover {
-  border-bottom-color: #fc6423;
-  color: #fc6423;
+  border-bottom-color: #222;
+  color: #222;
 }
 iframe,
 img,
@@ -310,8 +310,8 @@ td {
   transition-property: background-color;
 }
 .btn:hover {
-  background: #fc6423;
-  border-color: #fc6423;
+  background: #222;
+  border-color: #222;
   color: #fff;
 }
 .btn + .btn {
@@ -872,7 +872,7 @@ pre .javascript .function {
 .pagination .prev:hover,
 .pagination .next:hover,
 .pagination .page-number:hover {
-  border-top-color: #fc6423;
+  border-top-color: #222;
 }
 .pagination .space {
   margin: 0;
@@ -904,7 +904,7 @@ pre .javascript .function {
   .pagination .prev:hover,
   .pagination .next:hover,
   .pagination .page-number:hover {
-    border-bottom-color: #fc6423;
+    border-bottom-color: #222;
   }
 }
 .comments {
@@ -921,8 +921,8 @@ pre .javascript .function {
   margin: 0.1em 0.2em;
 }
 .comment-button-group .comment-button.active {
-  background: #fc6423;
-  border-color: #fc6423;
+  background: #222;
+  border-color: #222;
   color: #fff;
 }
 .comment-position {
@@ -980,7 +980,7 @@ pre .javascript .function {
   }
 }
 .headband {
-  background: #fc6423;
+  background: #222;
   height: 3px;
 }
 .site-meta {
@@ -993,7 +993,7 @@ pre .javascript .function {
   }
 }
 .brand {
-  background: #fc6423;
+  background: #222;
   border-bottom: none;
   color: #fff;
   display: inline-block;
@@ -1123,7 +1123,7 @@ pre .javascript .function {
   opacity: 0;
 }
 .sidebar {
-  background: #fc6423;
+  background: #222;
   bottom: 0;
   box-shadow: inset 0 2px 6px #000;
   position: fixed;
@@ -1178,7 +1178,7 @@ pre .javascript .function {
   border-radius: 50%;
 }
 .site-author-name {
-  color: #fc6423;
+  color: #222;
   font-weight: 600;
   margin: 0;
   text-align: center;
@@ -1203,7 +1203,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #65ff49;
+  background: #ebc979;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1316,7 +1316,7 @@ pre .javascript .function {
   display: block;
 }
 .sidebar-toggle {
-  background: #fc6423;
+  background: #222;
   bottom: 45px;
   cursor: pointer;
   height: 14px;
@@ -1518,7 +1518,7 @@ pre .javascript .function {
   }
 }
 .back-to-top {
-  background: #fc6423;
+  background: #222;
   bottom: -100px;
   box-sizing: border-box;
   color: #fff;
@@ -1676,7 +1676,7 @@ pre .javascript .function {
   border-bottom-color: #666;
 }
 .posts-collapse .post-header:hover::before {
-  background: #fc6423;
+  background: #222;
 }
 .posts-collapse .post-meta {
   display: inline;
@@ -1927,7 +1927,7 @@ pre .javascript .function {
 }
 .post-nav-item a:hover {
   border-bottom: none;
-  color: #fc6423;
+  color: #222;
 }
 .post-nav-item a:active {
   top: 2px;
@@ -2034,11 +2034,11 @@ pre .javascript .function {
   padding: 0;
 }
 #event-list hr {
-  background: #fc6423;
+  background: #222;
   margin: 20px 0 45px 0;
 }
 #event-list hr::after {
-  background: #fc6423;
+  background: #222;
   color: #fff;
   content: 'NOW';
   display: inline-block;
@@ -2110,7 +2110,7 @@ pre .javascript .function {
   color: #dfdfdf;
 }
 #event-list li.event-now {
-  background: #fc6423;
+  background: #222;
   color: #fff;
   padding: 15px 0 15px 10px;
 }
@@ -2122,7 +2122,7 @@ pre .javascript .function {
   color: #fff !important;
 }
 #event-list li.event-future {
-  background: #fc6423;
+  background: #222;
   color: #fff;
   padding: 15px 0 15px 10px;
 }
@@ -2199,7 +2199,7 @@ ul.breadcrumb li + li:last-child {
   margin: 10px;
 }
 .tag-cloud a:hover {
-  color: #fc6423 !important;
+  color: #222 !important;
 }
 .header {
   margin: 0 auto;
@@ -2310,7 +2310,7 @@ ul.breadcrumb li + li:last-child {
   position: relative;
 }
 .site-meta {
-  background: #fc6423;
+  background: #222;
   color: #fff;
   padding: 20px 0;
 }
@@ -2442,8 +2442,8 @@ ul.breadcrumb li + li:last-child {
 }
 .sidebar a:hover,
 .sidebar span.exturl:hover {
-  border-bottom-color: #fc6423;
-  color: #fc6423;
+  border-bottom-color: #222;
+  color: #222;
 }
 .sidebar-inner {
   background: #fff;
