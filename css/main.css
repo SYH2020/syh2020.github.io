@@ -1203,7 +1203,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #e0ff2b;
+  background: #1c2f3c;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1792,7 +1792,7 @@ pre .javascript .function {
   overflow: hidden;
   padding-top: 75%;
   position: relative;
-  width: 100%;
+  width: 80%;
 }
 .post-body .video-container iframe,
 .post-body .video-container object,
