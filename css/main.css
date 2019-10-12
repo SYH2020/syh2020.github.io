@@ -1203,7 +1203,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #124a13;
+  background: #3e1122;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1291,7 +1291,7 @@ pre .javascript .function {
 }
 .sidebar-nav li {
   border-bottom: 1px solid transparent;
-  color: #555;
+  color: #fd966a;
   cursor: pointer;
   display: inline-block;
   font-size: 0.875em;
