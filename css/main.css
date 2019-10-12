@@ -284,7 +284,7 @@ td {
 }
 th,
 td {
-  border: 1px solid #fd966a;
+  border: 1px solid #ddd;
   border-bottom: 3px solid #ddd;
 }
 th {
@@ -709,17 +709,17 @@ pre .javascript .function {
 .post-body .tabs ul.nav-tabs li.tab.active,
 .tabs-comment ul.nav-tabs li.tab.active {
   border-bottom: 1px solid transparent;
-  border-left: 1px solid #fd966a;
-  border-right: 1px solid #fd966a;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
   border-top: 3px solid #fd966a;
 }
 @media (max-width: 413px) {
   .post-body .tabs ul.nav-tabs li.tab.active,
   .tabs-comment ul.nav-tabs li.tab.active {
-    border-bottom: 1px solid #fd966a;
+    border-bottom: 1px solid #ddd;
     border-left: 3px solid #fd966a;
-    border-right: 1px solid #fd966a;
-    border-top: 1px solid #fd966a;
+    border-right: 1px solid #ddd;
+    border-top: 1px solid #ddd;
   }
 }
 .post-body .tabs ul.nav-tabs li.tab.active a,
@@ -729,7 +729,7 @@ pre .javascript .function {
 }
 .post-body .tabs .tab-content .tab-pane,
 .tabs-comment .tab-content .tab-pane {
-  border: 1px solid #fd966a;
+  border: 1px solid #ddd;
   padding: 20px 20px 0 20px;
 }
 .post-body .tabs .tab-content .tab-pane:not(.active),
@@ -993,7 +993,7 @@ pre .javascript .function {
   }
 }
 .brand {
-  background: #222;
+  background: #fd966a;
   border-bottom: none;
   color: #fff;
   display: inline-block;
@@ -1203,7 +1203,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ddb416;
+  background: #1ad1c7;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2403,7 +2403,7 @@ ul.breadcrumb li + li:last-child {
 }
 .sub-menu {
   background: #fff;
-  border-bottom: 1px solid #fd966a;
+  border-bottom: 1px solid #ddd;
   margin: 0;
   padding: 6px 0;
 }
