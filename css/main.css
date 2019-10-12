@@ -311,7 +311,7 @@ td {
 }
 .btn:hover {
   background: #222;
-  border-color: #222;
+  border-color: #fd966a;
   color: #fff;
 }
 .btn + .btn {
@@ -922,7 +922,7 @@ pre .javascript .function {
 }
 .comment-button-group .comment-button.active {
   background: #222;
-  border-color: #222;
+  border-color: #fd966a;
   color: #fff;
 }
 .comment-position {
@@ -1203,7 +1203,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff5050;
+  background: #79ff81;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
