@@ -212,8 +212,8 @@ span.exturl {
 }
 a:hover,
 span.exturl:hover {
-  border-bottom-color: #fd966a;
-  color: #fd966a;
+  border-bottom-color: #222;
+  color: #222;
 }
 iframe,
 img,
@@ -311,7 +311,7 @@ td {
 }
 .btn:hover {
   background: #222;
-  border-color: #fd966a;
+  border-color: #222;
   color: #fff;
 }
 .btn + .btn {
@@ -872,7 +872,7 @@ pre .javascript .function {
 .pagination .prev:hover,
 .pagination .next:hover,
 .pagination .page-number:hover {
-  border-top-color: #fd966a;
+  border-top-color: #222;
 }
 .pagination .space {
   margin: 0;
@@ -904,7 +904,7 @@ pre .javascript .function {
   .pagination .prev:hover,
   .pagination .next:hover,
   .pagination .page-number:hover {
-    border-bottom-color: #fd966a;
+    border-bottom-color: #222;
   }
 }
 .comments {
@@ -922,7 +922,7 @@ pre .javascript .function {
 }
 .comment-button-group .comment-button.active {
   background: #222;
-  border-color: #fd966a;
+  border-color: #222;
   color: #fff;
 }
 .comment-position {
@@ -980,7 +980,7 @@ pre .javascript .function {
   }
 }
 .headband {
-  background: #fd966a;
+  background: #222;
   height: 3px;
 }
 .site-meta {
@@ -1203,7 +1203,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #e5dba7;
+  background: #fae;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1518,7 +1518,7 @@ pre .javascript .function {
   }
 }
 .back-to-top {
-  background: #fd966a;
+  background: #222;
   bottom: -100px;
   box-sizing: border-box;
   color: #fff;
@@ -1927,7 +1927,7 @@ pre .javascript .function {
 }
 .post-nav-item a:hover {
   border-bottom: none;
-  color: #fd966a;
+  color: #222;
 }
 .post-nav-item a:active {
   top: 2px;
@@ -2199,7 +2199,7 @@ ul.breadcrumb li + li:last-child {
   margin: 10px;
 }
 .tag-cloud a:hover {
-  color: #fd966a !important;
+  color: #222 !important;
 }
 .header {
   margin: 0 auto;
