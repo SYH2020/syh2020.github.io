@@ -995,14 +995,14 @@ pre .javascript .function {
 .brand {
   background: #ffa500;
   border-bottom: none;
-  color: #fff;
+  color: #ffa500;
   display: inline-block;
   line-height: 1.375em;
   padding: 0 40px;
   position: relative;
 }
 .brand:hover {
-  color: #fff;
+  color: #ffa500;
 }
 .logo {
   display: inline-block;
@@ -1203,7 +1203,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #4f990e;
+  background: #7f0dc3;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
