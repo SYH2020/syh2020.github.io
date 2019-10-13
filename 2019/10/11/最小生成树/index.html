@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="WYCTSTF">
 <meta property="og:description" content="点开洛谷模板题一看原来是抄了题解，吓得赶紧重新学习">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-13T11:01:06.831Z">
+<meta property="og:updated_time" content="2019-10-13T11:49:12.752Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【学习笔记】最小生成树(持续更新ing)">
 <meta name="twitter:description" content="点开洛谷模板题一看原来是抄了题解，吓得赶紧重新学习">
@@ -284,7 +284,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-13 19:01:06" itemprop="dateModified" datetime="2019-10-13T19:01:06+08:00">2019-10-13</time>
+                <time title="修改时间：2019-10-13 19:49:12" itemprop="dateModified" datetime="2019-10-13T19:49:12+08:00">2019-10-13</time>
               </span>
             
           
@@ -316,7 +316,17 @@
 </ol>
 <p>所有的边扫描完成之后，就构成了一棵MST</p>
 <p>时间复杂度为O(m logm)</p>
-<p>据说适用于稠密图</p>
+<p>据说适用于稀疏图</p>
+<h1 id="Prim算法："><a href="#Prim算法：" class="headerlink" title="Prim算法："></a>Prim算法：</h1><h2 id="算法思路：-1"><a href="#算法思路：-1" class="headerlink" title="算法思路："></a>算法思路：</h2><ul>
+<li><p>最初，确定节点1在MST中</p>
+</li>
+<li><p>和Dijkstra相似(不知道的可以略过这句话)，以1为当前节点不断找到与当前节点距离最短的节点，使用一个v[N]数组进行标记，如果没有到过该节点，那么就收入到MST中,ans+=dis[now][to]</p>
+</li>
+<li><p>采用一个d[N]数组记录当前节点到各个节点的距离值，在收入节点与当前节点的转移中不断更新</p>
+</li>
+</ul>
+<p>所有的点被收入之后，就生成了一棵MST</p>
+<p>时间复杂度为O(N^2)，可以通过堆优化降低复杂度到O(m logn)，但是编程复杂度就不如Kruskal优秀，因此适用于稠密图，尤其是完全图的最小生成树求解</p>
 
     </div>
 
@@ -404,7 +414,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义："><span class="nav-number">1.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kruskal算法："><span class="nav-number">2.</span> <span class="nav-text">Kruskal算法：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路："><span class="nav-number">2.1.</span> <span class="nav-text">算法思路：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法流程："><span class="nav-number">2.2.</span> <span class="nav-text">算法流程：</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义："><span class="nav-number">1.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kruskal算法："><span class="nav-number">2.</span> <span class="nav-text">Kruskal算法：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路："><span class="nav-number">2.1.</span> <span class="nav-text">算法思路：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法流程："><span class="nav-number">2.2.</span> <span class="nav-text">算法流程：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Prim算法："><span class="nav-number">3.</span> <span class="nav-text">Prim算法：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路：-1"><span class="nav-number">3.1.</span> <span class="nav-text">算法思路：</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
