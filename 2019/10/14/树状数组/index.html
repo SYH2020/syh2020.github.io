@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="引入：在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数">
+  <meta name="description" content="`在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数">
 <meta name="keywords" content="学习笔记,树状数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【学习笔记】树状数组">
 <meta property="og:url" content="http://yoursite.com/2019/10/14/树状数组/index.html">
 <meta property="og:site_name" content="WYCTSTF">
-<meta property="og:description" content="引入：在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数">
+<meta property="og:description" content="`在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://img2018.cnblogs.com/blog/1576249/201908/1576249-20190801202345653-2102085685.png">
-<meta property="og:updated_time" content="2019-10-14T10:21:49.758Z">
+<meta property="og:updated_time" content="2019-10-14T10:23:11.131Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【学习笔记】树状数组">
-<meta name="twitter:description" content="引入：在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数">
+<meta name="twitter:description" content="`在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数">
 <meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1576249/201908/1576249-20190801202345653-2102085685.png">
   <link rel="canonical" href="http://yoursite.com/2019/10/14/树状数组/">
 
@@ -272,7 +272,7 @@
                 
               
 
-              <time title="创建时间：2019-10-14 18:10:42 / 修改时间：18:21:49" itemprop="dateCreated datePublished" datetime="2019-10-14T18:10:42+08:00">2019-10-14</time>
+              <time title="创建时间：2019-10-14 18:10:42 / 修改时间：18:23:11" itemprop="dateCreated datePublished" datetime="2019-10-14T18:10:42+08:00">2019-10-14</time>
             </span>
           
             
@@ -291,7 +291,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="引入："><a href="#引入：" class="headerlink" title="引入："></a>引入：</h2><p>在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数</p>
+        <p>`<br>在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数</p>
 <a id="more"></a>
 <h2 id="基本思想："><a href="#基本思想：" class="headerlink" title="基本思想："></a>基本思想：</h2><p>任意整数表示为二进制数时都是不同的，因此我们可以将x二进制分解，例如21可以分解成2^4+2^2+2^0，也就是说，[ 1 , x ]的区间可以分解成 log ( x )的小区间，以21为例：</p>
 <ol>
@@ -417,7 +417,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引入："><span class="nav-number">1.</span> <span class="nav-text">引入：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本思想："><span class="nav-number">2.</span> <span class="nav-text">基本思想：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本算法："><span class="nav-number">3.</span> <span class="nav-text">基本算法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-求lowbit-n"><span class="nav-number">4.</span> <span class="nav-text">1.求lowbit( n )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-单点修改操作："><span class="nav-number">5.</span> <span class="nav-text">2. 单点修改操作：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-查询前缀和："><span class="nav-number">6.</span> <span class="nav-text">3. 查询前缀和：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-二维树状数组"><span class="nav-number">7.</span> <span class="nav-text">4. 二维树状数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单点修改："><span class="nav-number">7.1.</span> <span class="nav-text">单点修改：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区间和统计："><span class="nav-number">7.2.</span> <span class="nav-text">区间和统计：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-区间修改-amp-单点查询（差分数组）："><span class="nav-number">8.</span> <span class="nav-text">5. 区间修改 &amp; 单点查询（差分数组）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-区间修改、区间查询"><span class="nav-number">9.</span> <span class="nav-text">6. 区间修改、区间查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#That’s-all"><span class="nav-number"></span> <span class="nav-text">That’s all.</span></a></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本思想："><span class="nav-number">1.</span> <span class="nav-text">基本思想：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本算法："><span class="nav-number">2.</span> <span class="nav-text">基本算法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-求lowbit-n"><span class="nav-number">3.</span> <span class="nav-text">1.求lowbit( n )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-单点修改操作："><span class="nav-number">4.</span> <span class="nav-text">2. 单点修改操作：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-查询前缀和："><span class="nav-number">5.</span> <span class="nav-text">3. 查询前缀和：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-二维树状数组"><span class="nav-number">6.</span> <span class="nav-text">4. 二维树状数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单点修改："><span class="nav-number">6.1.</span> <span class="nav-text">单点修改：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区间和统计："><span class="nav-number">6.2.</span> <span class="nav-text">区间和统计：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-区间修改-amp-单点查询（差分数组）："><span class="nav-number">7.</span> <span class="nav-text">5. 区间修改 &amp; 单点查询（差分数组）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-区间修改、区间查询"><span class="nav-number">8.</span> <span class="nav-text">6. 区间修改、区间查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#That’s-all"><span class="nav-number"></span> <span class="nav-text">That’s all.</span></a></div>
         
       </div>
       <!--/noindex-->
