@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="引入：在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数 基本思想：任意整数表示为二进制数时都是不同的，因此我们可以将x二进制分解，例如21可以分解成2^4+2^2+2^0，也就是说，[ 1 , x ]的区间可以分解成 log ( x )的小区间，以21为例：  [ 1 , 2 ^ 4 ]的小区间">
+  <meta name="description" content="引入：在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数">
 <meta name="keywords" content="学习笔记,树状数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【学习笔记】树状数组">
 <meta property="og:url" content="http://yoursite.com/2019/10/14/树状数组/index.html">
 <meta property="og:site_name" content="WYCTSTF">
-<meta property="og:description" content="引入：在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数 基本思想：任意整数表示为二进制数时都是不同的，因此我们可以将x二进制分解，例如21可以分解成2^4+2^2+2^0，也就是说，[ 1 , x ]的区间可以分解成 log ( x )的小区间，以21为例：  [ 1 , 2 ^ 4 ]的小区间">
+<meta property="og:description" content="引入：在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://img2018.cnblogs.com/blog/1576249/201908/1576249-20190801202345653-2102085685.png">
-<meta property="og:updated_time" content="2019-10-14T10:13:52.858Z">
+<meta property="og:updated_time" content="2019-10-14T10:21:49.758Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【学习笔记】树状数组">
-<meta name="twitter:description" content="引入：在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数 基本思想：任意整数表示为二进制数时都是不同的，因此我们可以将x二进制分解，例如21可以分解成2^4+2^2+2^0，也就是说，[ 1 , x ]的区间可以分解成 log ( x )的小区间，以21为例：  [ 1 , 2 ^ 4 ]的小区间">
+<meta name="twitter:description" content="引入：在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数">
 <meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1576249/201908/1576249-20190801202345653-2102085685.png">
   <link rel="canonical" href="http://yoursite.com/2019/10/14/树状数组/">
 
@@ -272,7 +272,7 @@
                 
               
 
-              <time title="创建时间：2019-10-14 18:10:42 / 修改时间：18:13:52" itemprop="dateCreated datePublished" datetime="2019-10-14T18:10:42+08:00">2019-10-14</time>
+              <time title="创建时间：2019-10-14 18:10:42 / 修改时间：18:21:49" itemprop="dateCreated datePublished" datetime="2019-10-14T18:10:42+08:00">2019-10-14</time>
             </span>
           
             
@@ -292,6 +292,7 @@
 
       
         <h2 id="引入："><a href="#引入：" class="headerlink" title="引入："></a>引入：</h2><p>在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数</p>
+<a id="more"></a>
 <h2 id="基本思想："><a href="#基本思想：" class="headerlink" title="基本思想："></a>基本思想：</h2><p>任意整数表示为二进制数时都是不同的，因此我们可以将x二进制分解，例如21可以分解成2^4+2^2+2^0，也就是说，[ 1 , x ]的区间可以分解成 log ( x )的小区间，以21为例：</p>
 <ol>
 <li>[ 1 , 2 ^ 4 ]的小区间</li>
