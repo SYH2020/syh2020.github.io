@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="`在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数">
-<meta name="keywords" content="学习笔记,树状数组">
+  <meta name="description" content="在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数">
+<meta name="keywords" content="算法模板,学习笔记,树状数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【学习笔记】树状数组">
+<meta property="og:title" content="树状数组">
 <meta property="og:url" content="http://yoursite.com/2019/10/14/树状数组/index.html">
 <meta property="og:site_name" content="WYCTSTF">
-<meta property="og:description" content="`在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数">
+<meta property="og:description" content="在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://img2018.cnblogs.com/blog/1576249/201908/1576249-20190801202345653-2102085685.png">
-<meta property="og:updated_time" content="2019-10-14T10:23:11.131Z">
+<meta property="og:updated_time" content="2019-10-17T11:04:48.736Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【学习笔记】树状数组">
-<meta name="twitter:description" content="`在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数">
+<meta name="twitter:title" content="树状数组">
+<meta name="twitter:description" content="在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数">
 <meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1576249/201908/1576249-20190801202345653-2102085685.png">
   <link rel="canonical" href="http://yoursite.com/2019/10/14/树状数组/">
 
@@ -83,7 +83,7 @@
   };
 </script>
 
-  <title>【学习笔记】树状数组 | WYCTSTF</title>
+  <title>树状数组 | WYCTSTF</title>
   
 
 
@@ -255,7 +255,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            【学习笔记】树状数组
+            树状数组
             
 
           
@@ -272,11 +272,19 @@
                 
               
 
-              <time title="创建时间：2019-10-14 18:10:42 / 修改时间：18:23:11" itemprop="dateCreated datePublished" datetime="2019-10-14T18:10:42+08:00">2019-10-14</time>
+              <time title="创建时间：2019-10-14 18:10:42" itemprop="dateCreated datePublished" datetime="2019-10-14T18:10:42+08:00">2019-10-14</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-17 19:04:48" itemprop="dateModified" datetime="2019-10-17T19:04:48+08:00">2019-10-17</time>
+              </span>
             
           
 
@@ -291,7 +299,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>`<br>在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数</p>
+        <p>在解题时常需要维护一个数组的前缀和，但是前缀和一旦涉及单点修改，一次操作就是O ( n )级别的，这里我们需要具有树形结构的树状数组来减小修改的操作数</p>
 <a id="more"></a>
 <h2 id="基本思想："><a href="#基本思想：" class="headerlink" title="基本思想："></a>基本思想：</h2><p>任意整数表示为二进制数时都是不同的，因此我们可以将x二进制分解，例如21可以分解成2^4+2^2+2^0，也就是说，[ 1 , x ]的区间可以分解成 log ( x )的小区间，以21为例：</p>
 <ol>
@@ -351,6 +359,8 @@
           
           <div class="post-tags">
             
+              <a href="/tags/算法模板/" rel="tag"># 算法模板</a>
+            
               <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
             
               <a href="/tags/树状数组/" rel="tag"># 树状数组</a>
@@ -363,8 +373,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/10/13/01分数规划/" rel="next" title="【学习笔记】01分数规划">
-                  <i class="fa fa-chevron-left"></i> 【学习笔记】01分数规划
+                <a href="/2019/10/13/01分数规划/" rel="next" title="01分数规划">
+                  <i class="fa fa-chevron-left"></i> 01分数规划
                 </a>
               
             </div>
@@ -466,7 +476,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
