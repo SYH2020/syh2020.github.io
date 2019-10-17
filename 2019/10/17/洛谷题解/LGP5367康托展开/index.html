@@ -56,14 +56,14 @@
 </script>
 
   <meta name="description" content="康托展开详见我的博文">
-<meta name="keywords" content="线段树,数学,算法模板,康托展开">
+<meta name="keywords" content="算法模板,线段树,数学,康托展开">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【洛谷 P5367】【模板】康托展开">
 <meta property="og:url" content="http://yoursite.com/2019/10/17/洛谷题解/LGP5367康托展开/index.html">
 <meta property="og:site_name" content="WYCTSTF">
 <meta property="og:description" content="康托展开详见我的博文">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-17T12:13:39.304Z">
+<meta property="og:updated_time" content="2019-10-17T12:25:15.017Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【洛谷 P5367】【模板】康托展开">
 <meta name="twitter:description" content="康托展开详见我的博文">
@@ -270,7 +270,7 @@
                 
               
 
-              <time title="创建时间：2019-10-17 20:09:55 / 修改时间：20:13:39" itemprop="dateCreated datePublished" datetime="2019-10-17T20:09:55+08:00">2019-10-17</time>
+              <time title="创建时间：2019-10-17 20:09:55 / 修改时间：20:25:15" itemprop="dateCreated datePublished" datetime="2019-10-17T20:09:55+08:00">2019-10-17</time>
             </span>
           
             
@@ -290,7 +290,14 @@
 
       
         <p>康托展开详见我的<a href="https://wyctstf.github.io/2019/10/17/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%BA%B7%E6%8B%93%E5%B1%95%E5%BC%80/" target="_blank" rel="noopener">博文</a></p>
+<a id="more"></a>
 
+<h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>给定一个序列的长度n和一组数列，保证这组数列是1-n的全排列中的一种，问这组排列在全排列中的字典序排名</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>此题用康托展开O(n^2)算法可以通过，但是鉴于严格情况下的数据以及限制，蒟蒻用的还是O(NlgN)的解法</p>
+<p>一个优化思想是采用树状数组维护原数列中每一个a[i]的rank[i]的值，也就是维护区间和,其sum值就是rank值，用完之后add(i,-1)即可</p>
+<p>先要O(n)维护一个阶乘的值</p>
+<p><del>用树状数组而不用线段树的原因：树状数组码量小</del></p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD=<span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e6</span>+<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,ans;</span><br><span class="line"><span class="keyword">int</span> a[N],c[N],l[N],fac[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(x&lt;=n)&#123;</span><br><span class="line">        c[x]+=k,x+=l[x];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(x)&#123;</span><br><span class="line">        t+=c[x];</span><br><span class="line">        x-=l[x];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)) f=(ch==<span class="string">'-'</span>)?<span class="number">-1</span>:<span class="number">1</span>,ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch)) x=x*<span class="number">10</span>+(ch-<span class="string">'0'</span>),ch=getchar();</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    n=read();</span><br><span class="line">    fac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) fac[i]=fac[i<span class="number">-1</span>]*i%MOD,l[i]=i&amp;(-i);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) add(i,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        a[i]=read();</span><br><span class="line">        ans=(ans+((sum(a[i])<span class="number">-1</span>)*fac[n-i])%MOD)%MOD;</span><br><span class="line">        add(a[i],<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -305,11 +312,11 @@
           
           <div class="post-tags">
             
+              <a href="/tags/算法模板/" rel="tag"># 算法模板</a>
+            
               <a href="/tags/线段树/" rel="tag"># 线段树</a>
             
               <a href="/tags/数学/" rel="tag"># 数学</a>
-            
-              <a href="/tags/算法模板/" rel="tag"># 算法模板</a>
             
               <a href="/tags/康托展开/" rel="tag"># 康托展开</a>
             
@@ -375,6 +382,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目大意"><span class="nav-number">1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
