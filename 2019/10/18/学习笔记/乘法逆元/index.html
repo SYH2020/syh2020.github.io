@@ -10,6 +10,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 3.9.0">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
@@ -56,7 +67,7 @@
 </script>
 
   <meta name="description" content="浅析乘法逆元和几种计算方法">
-<meta name="keywords" content="学习笔记,数论,乘法逆元,扩展欧几里得">
+<meta name="keywords" content="数论,乘法逆元,学习笔记,扩展欧几里得">
 <meta property="og:type" content="article">
 <meta property="og:title" content="乘法逆元">
 <meta property="og:url" content="http://yoursite.com/2019/10/18/学习笔记/乘法逆元/index.html">
@@ -340,11 +351,11 @@
           
           <div class="post-tags">
             
-              <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
-            
               <a href="/tags/数论/" rel="tag"># 数论</a>
             
               <a href="/tags/乘法逆元/" rel="tag"># 乘法逆元</a>
+            
+              <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
             
               <a href="/tags/扩展欧几里得/" rel="tag"># 扩展欧几里得</a>
             
@@ -365,6 +376,10 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/10/20/diary/彷徨中的前行/" rel="prev" title="2019CSP-S1退役记">
+                  2019CSP-S1退役记 <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -429,7 +444,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
