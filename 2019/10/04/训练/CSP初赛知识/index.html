@@ -328,7 +328,6 @@
 
       
         <a id="more"></a>
-
 <h1 id="List："><a href="#List：" class="headerlink" title="List："></a>List：</h1><ul>
 <li><p>递推</p>
 <ul>
@@ -374,8 +373,7 @@
 <li>各类最短路算法</li>
 </ul>
 </li>
-<li><p>数论基础：</p>
-<ul>
+<li>数论基础：<ul>
 <li>同余<ul>
 <li>费马小定理</li>
 <li>欧拉函数</li>
@@ -396,8 +394,7 @@
 <li><a href="https://baike.baidu.com/item/5G/29780?fr=aladdin" target="_blank" rel="noopener">5G</a></li>
 </ul>
 </li>
-<li><p>基础数据结构</p>
-<ul>
+<li>基础数据结构<ul>
 <li>栈、单调栈、出入栈顺序</li>
 <li>队列、单调队列、循环队列、双端队列(deque)</li>
 <li>链表的各种操作(增删查补替排)、双端链表<ul>
@@ -406,13 +403,11 @@
 </li>
 </ul>
 </li>
-<li><p>图的各种概念</p>
-<ul>
+<li>图的各种概念<ul>
 <li>完全图</li>
 </ul>
 </li>
-<li><p>二分图基础</p>
-<ul>
+<li>二分图基础<ul>
 <li>最大匹配</li>
 <li>最小点覆盖</li>
 <li>最小边覆盖</li>
@@ -504,22 +499,14 @@
 </li>
 <li><p>我国1994年正式接入Internet</p>
 <h2 id="按地理位置分类"><a href="#按地理位置分类" class="headerlink" title="按地理位置分类"></a>按地理位置分类</h2></li>
-<li><p>LAN - 局域网</p>
-</li>
-<li><p>MAN - 城域网</p>
-</li>
-<li><p>WAN - 广域网</p>
-<h2 id="按拓扑结构分类："><a href="#按拓扑结构分类：" class="headerlink" title="按拓扑结构分类："></a>按拓扑结构分类：</h2></li>
-<li><p>星形</p>
-</li>
-<li><p>总线形</p>
-</li>
-<li><p>环形</p>
-</li>
-<li><p>树形</p>
-</li>
-<li><p>网状形</p>
-</li>
+<li>LAN - 局域网</li>
+<li>MAN - 城域网</li>
+<li>WAN - 广域网<h2 id="按拓扑结构分类："><a href="#按拓扑结构分类：" class="headerlink" title="按拓扑结构分类："></a>按拓扑结构分类：</h2></li>
+<li>星形</li>
+<li>总线形</li>
+<li>环形</li>
+<li>树形</li>
+<li>网状形</li>
 </ul>
 <p>Internet网连有许多不同拓扑结构的LAN、WAN、MAN，因此没有固定拓扑结构</p>
 <h2 id="按采用的交换技术进行分类："><a href="#按采用的交换技术进行分类：" class="headerlink" title="按采用的交换技术进行分类："></a>按采用的交换技术进行分类：</h2><p>电路交换、报文交换、分组交换</p>
@@ -529,65 +516,51 @@
 <p>TCP/IP 4层模型：<br><strong>应用层(对应OSI前三层)</strong>、传输层、国际互联层、<strong>网络接口层(对应OSI后两层)</strong>，中间两层一一对应</p>
 <h2 id="IP地址："><a href="#IP地址：" class="headerlink" title="IP地址："></a>IP地址：</h2><blockquote>
 <p>用于<strong>表示</strong>Internet<strong>网络</strong>上<strong>节点</strong>的<strong>32位</strong>地址，<strong>V6版本是128位的</strong>，分8组16位</p>
+<ul>
+<li>每个地址由网络ID和主机ID组成，通常用句点分割的八位字节的十进制数表示：(192.168.7.27)</li>
+</ul>
 </blockquote>
 <ul>
-<li><p>每个地址由网络ID和主机ID组成，通常用句点分割的八位字节的十进制数表示：(192.168.7.27)</p>
-</li>
-<li><p>IP地址分为ABCDE五类，ABC为常用类</p>
-</li>
-<li><p>网络ID标识大规模的TCP/IP网际网络(由网络组成的网络)内的单个网段</p>
-</li>
-<li><p>主机ID标识每个网络内部的TCP/IP节点，每个设备的主机ID唯一地识别所在网络的单个系统</p>
-</li>
-<li><p>IP地址的主机号范围是0-255，但主机ID的所有域不能都为0或255：</p>
-<ul>
+<li>IP地址分为ABCDE五类，ABC为常用类</li>
+<li>网络ID标识大规模的TCP/IP网际网络(由网络组成的网络)内的单个网段</li>
+<li>主机ID标识每个网络内部的TCP/IP节点，每个设备的主机ID唯一地识别所在网络的单个系统</li>
+<li>IP地址的主机号范围是0-255，但主机ID的所有域不能都为0或255：<ul>
 <li>如果网络ID为10，那么不能分配10.0.0.0和10.255.255.255这两个IP地址</li>
 <li>如果网络ID为192.114.31，那么就不能分配192.114.31.0和192.114.31.255</li>
 </ul>
 </li>
-<li><p>ABC类网络地址</p>
-<ul>
-<li>A类:1.0.0.1 — 126.255.255.254</li>
-<li>B类:128.1.0.1 — 191.255.255.254</li>
-<li>C类:192.0.0.1 — 223.255.255.254</li>
+<li>ABC类网络地址<ul>
+<li>A类:1.0.0.1 —- 126.255.255.254</li>
+<li>B类:128.1.0.1 —- 191.255.255.254</li>
+<li>C类:192.0.0.1 —- 223.255.255.254</li>
 </ul>
 </li>
-<li><p>仅供单位内部使用而不用付费的专网IP地址：</p>
-<ul>
-<li>A:10.0.0.0 – 10.255.255.255</li>
-<li>B:172.16.0.0 – 172.31.255.255</li>
-<li>C:192.168.0.0 – 192.168.255.255<h2 id="TCP-IP协议："><a href="#TCP-IP协议：" class="headerlink" title="TCP/IP协议："></a>TCP/IP协议：</h2></li>
+<li>仅供单位内部使用而不用付费的专网IP地址：<ul>
+<li>A:10.0.0.0 — 10.255.255.255</li>
+<li>B:172.16.0.0 — 172.31.255.255</li>
+<li>C:192.168.0.0 — 192.168.255.255<h2 id="TCP-IP协议："><a href="#TCP-IP协议：" class="headerlink" title="TCP/IP协议："></a>TCP/IP协议：</h2></li>
 </ul>
 </li>
 <li><p>Internet Protocol 、 Transmission Control Protocol</p>
 </li>
 <li><p>Internet最为基础和重要的协议</p>
 </li>
-<li><p>用于因特网Internet的一组通信协议，本质上是一种采用分组交换技术的协议，基本思想是把信息分割成一个个不超过一定大小的信息包来传送</p>
-</li>
-<li><p>TCP-传输控制协议，负责网上信息的正确传输</p>
-</li>
-<li><p>IP-网际协议，负责将信息从一处传输到另一处</p>
-<h3 id="模型："><a href="#模型：" class="headerlink" title="模型："></a>模型：</h3></li>
-<li><p>应用层 —- Telent、FTP和e-mail等</p>
-</li>
-<li><p>传输层 —- TCP和UDP</p>
-</li>
-<li><p>网络层 —- IP、ICMP和IGMP</p>
-</li>
-<li><p>网络接口层 —- 设备驱动程序及接口卡</p>
-</li>
+<li>用于因特网Internet的一组通信协议，本质上是一种采用分组交换技术的协议，基本思想是把信息分割成一个个不超过一定大小的信息包来传送</li>
+<li>TCP-传输控制协议，负责网上信息的正确传输</li>
+<li>IP-网际协议，负责将信息从一处传输到另一处<h3 id="模型："><a href="#模型：" class="headerlink" title="模型："></a>模型：</h3></li>
+<li>应用层 —— Telent、FTP和e-mail等</li>
+<li>传输层 —— TCP和UDP</li>
+<li>网络层 —— IP、ICMP和IGMP</li>
+<li>网络接口层 —— 设备驱动程序及接口卡</li>
 </ul>
 <h2 id="域名和网址"><a href="#域名和网址" class="headerlink" title="域名和网址"></a>域名和网址</h2><p>如果要从一台计算机访问网上另一台计算机，就必须知道对方的网址，这里的网址有IP地址、域名地址和URL两种</p>
 <h3 id="IP地址：-1"><a href="#IP地址：-1" class="headerlink" title="IP地址："></a>IP地址：</h3><ul>
-<li><p>常见的IP地址分为IPv4和IPv6两大类，在IPv6地址的设计过程中一劳永逸的解决了地址短缺的问题，并且解决了IPv4中的其它一些问题</p>
-<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3></li>
+<li>常见的IP地址分为IPv4和IPv6两大类，在IPv6地址的设计过程中一劳永逸的解决了地址短缺的问题，并且解决了IPv4中的其它一些问题<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3></li>
 <li><p>为了方便记忆，Internet引入了字符形式的IP地址，即域名。每一层有一个子域名组成，子域名之间用”.”分割，其格式为：开头.主机名.主机类别.国家名(可以不要)</p>
 </li>
 <li><p>Internet上的域名由域名管理系统(DNS)(域名服务器)统一管理，DNS是一个分布式数据库系统，由域名空间、域名服务器、地址转换请求程序三部分组成，可以方便的转换成数值形式的IP地址进行访问，IP地址也可以反向转换成域名。在Internet上，域名和IP地址都是唯一的</p>
 </li>
-<li><p>顶级域名：</p>
-<ul>
+<li>顶级域名：<ul>
 <li>顶级国家域名,cn\us\uk</li>
 <li>国际顶级域名,int</li>
 <li>通用顶级域名名,com\net\gov\edu…</li>
@@ -632,10 +605,8 @@
 <li>UDP程序结构比较简单</li>
 </ul>
 </li>
-<li><p>TCP的三次握手(建立连接)和四次挥手(释放)，了解即可</p>
-</li>
-<li><p>TCP属于传输层的协议，IP属于网络层的协议</p>
-</li>
+<li>TCP的三次握手(建立连接)和四次挥手(释放)，了解即可</li>
+<li>TCP属于传输层的协议，IP属于网络层的协议</li>
 </ul>
 <h1 id="算法："><a href="#算法：" class="headerlink" title="算法："></a>算法：</h1><h2 id="排序："><a href="#排序：" class="headerlink" title="排序："></a>排序：</h2><ul>
 <li>稳定排序：<br>  直接插排、冒泡排序、归并排序、基数排序</li>
