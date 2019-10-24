@@ -331,8 +331,10 @@
 
       
         <h1 id="筛法"><a href="#筛法" class="headerlink" title="筛法"></a>筛法</h1><h2 id="Eratosthenes"><a href="#Eratosthenes" class="headerlink" title="Eratosthenes"></a>Eratosthenes</h2><blockquote>
-<p>思想：<strong>每个质数的倍数一定不是质数</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Eratosthenes */</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e7</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">bool</span> v[N]=&#123;<span class="literal">false</span>,<span class="literal">true</span>&#125;; <span class="comment">// 注意1不是质数</span></span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Primes</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=N;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(v[i]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;=N/i;j++)</span><br><span class="line">            v[i*j]=<span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">if</span>(!v[i]) <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>思想：<strong>每个质数的倍数一定不是质数</strong></p>
 </blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Eratosthenes */</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e7</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">bool</span> v[N]=&#123;<span class="literal">false</span>,<span class="literal">true</span>&#125;; <span class="comment">// 注意1不是质数</span></span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Primes</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=N;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(v[i]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;=N/i;j++)</span><br><span class="line">            v[i*j]=<span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">if</span>(!v[i]) <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>时间复杂度为$O\ (n \  \log\log n)$，可以应对比赛中绝大部分的质数筛选</p>
 <h2 id="欧拉筛"><a href="#欧拉筛" class="headerlink" title="欧拉筛"></a>欧拉筛</h2><blockquote>
 <p>通过判断一个数的最小质因子的方法使得每个数只会被它的最小质因子筛一次，从而达到O(n)的效果</p>
@@ -344,19 +346,28 @@
 <li>对于每一个数字，使用手头上的质数结合当前数字标记乘积，如果当前数字小于手头的质数，那么该合数的最小质因子就是i，为了避免时间的浪费，直接break</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e7</span>;</span><br><span class="line"><span class="keyword">int</span> n,cnt,p[maxn];</span><br><span class="line"><span class="keyword">bool</span> v[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Prime</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (v[i] == <span class="literal">false</span>)</span><br><span class="line">            p[++cnt] = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= cnt; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (i * p[j] &gt; n) <span class="comment">// 避免越界</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            v[i * p[j]] = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span> (i % p[j] == <span class="number">0</span>) <span class="comment">// p[j]不是最小质子，break</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>筛法的一道好题：<a href="https://www.luogu.org/problem/P2158" target="_blank" rel="noopener">仪仗队</a></p>
-<h1 id="最大公约数-GCD"><a href="#最大公约数-GCD" class="headerlink" title="最大公约数(GCD)"></a>最大公约数(GCD)</h1><h2 id="欧几里得算法-辗转相除"><a href="#欧几里得算法-辗转相除" class="headerlink" title="欧几里得算法/辗转相除"></a>欧几里得算法/辗转相除</h2><p>先上一波代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123; <span class="comment">// a&gt;b</span></span><br><span class="line">    <span class="keyword">return</span> (!b)?a:gcd(b,a%b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="最大公约数-GCD"><a href="#最大公约数-GCD" class="headerlink" title="最大公约数(GCD)"></a>最大公约数(GCD)</h1><h2 id="欧几里得算法-辗转相除"><a href="#欧几里得算法-辗转相除" class="headerlink" title="欧几里得算法/辗转相除"></a>欧几里得算法/辗转相除</h2><p>先上一波代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123; <span class="comment">// a&gt;b</span></span><br><span class="line">    <span class="keyword">return</span> (!b)?a:gcd(b,a%b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>已知两个数$a$，$b$，设$a$&gt;$b$</p>
-<p>设</p>
-<script type="math/tex; mode=display">x=gcd{(a,b)}</script><script type="math/tex; mode=display">a = {k1\ *x}</script><script type="math/tex; mode=display">b = {k2\ * x}</script><p>对于每个$gcd(a,b)，$不断地递归去解$gcd(b,a-b)$，可以消除$k1$,$k2$，最终当较小值被消除后，剩下的$a$就是$x$</p>
+<p>设<br>$$x=gcd{(a,b)}$$</p>
+<p>$$a = {k1\ *x}$$</p>
+<p>$$b = {k2\ * x}$$</p>
+<p>对于每个$gcd(a,b)，$不断地递归去解$gcd(b,a-b)$，可以消除$k1$,$k2$，最终当较小值被消除后，剩下的$a$就是$x$</p>
 <p>大佬们膜几组样例应该就懂了，当然大佬们一般都不会看蒟蒻写的sb东西der…</p>
 <blockquote>
 <p>样例1:<br>165 198</p>
+</blockquote>
+<blockquote>
 <p>样例2：<br>7 5</p>
 </blockquote>
-<p>然后发现，相比减法，我们可以选择$\%$ 法(魔法)</p>
+<p>然后发现，相比减法，我们可以选择$%$ 法(魔法)</p>
 <p>代码就是上面的了..</p>
-<h2 id="辗转相减"><a href="#辗转相减" class="headerlink" title="辗转相减"></a>辗转相减</h2><p>有些不喜欢魔法的，就直接减喽<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(a!=b)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a&gt;b) a-=b;</span><br><span class="line">        <span class="keyword">else</span> b-=a;</span><br><span class="line">        <span class="comment">/* 再判断一下是否有数等于0即可 */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="辗转相减"><a href="#辗转相减" class="headerlink" title="辗转相减"></a>辗转相减</h2><p>有些不喜欢魔法的，就直接减喽</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(a!=b)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a&gt;b) a-=b;</span><br><span class="line">        <span class="keyword">else</span> b-=a;</span><br><span class="line">        <span class="comment">/* 再判断一下是否有数等于0即可 */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>还有一种二进制加速的gcd，蒟蒻不是很懂，就放弃了…</p>
 
     </div>
@@ -385,8 +396,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/10/17/模板/[模板]康托展开/" rel="next" title="LG-P5367-康托展开">
-                  <i class="fa fa-chevron-left"></i> LG-P5367-康托展开
+                <a href="/2019/10/17/模板/[模板]康托展开/" rel="next" title="「LGP5367」-康托展开">
+                  <i class="fa fa-chevron-left"></i> 「LGP5367」-康托展开
                 </a>
               
             </div>
@@ -462,7 +473,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -488,7 +499,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
