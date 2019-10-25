@@ -66,19 +66,19 @@
   };
 </script>
 
-  <meta name="description" content="复习一波手写二叉堆的模板，以免初赛碰到没认出来导致场面一度尴尬">
-<meta name="keywords" content="算法模板,二叉堆">
+  <meta name="description" content="割点的模板">
+<meta name="keywords" content="算法模板,tarjan">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「LG P3378」堆">
-<meta property="og:url" content="http://yoursite.com/2019/10/11/模板/[模板]堆/index.html">
+<meta property="og:title" content="「LG P3388」割点">
+<meta property="og:url" content="http://yoursite.com/2019/10/24/模板/[模板]割点和桥/index.html">
 <meta property="og:site_name" content="WYCTSTF">
-<meta property="og:description" content="复习一波手写二叉堆的模板，以免初赛碰到没认出来导致场面一度尴尬">
+<meta property="og:description" content="割点的模板">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-24T04:54:33.801Z">
+<meta property="og:updated_time" content="2019-10-25T07:55:34.483Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="「LG P3378」堆">
-<meta name="twitter:description" content="复习一波手写二叉堆的模板，以免初赛碰到没认出来导致场面一度尴尬">
-  <link rel="canonical" href="http://yoursite.com/2019/10/11/模板/[模板]堆/">
+<meta name="twitter:title" content="「LG P3388」割点">
+<meta name="twitter:description" content="割点的模板">
+  <link rel="canonical" href="http://yoursite.com/2019/10/24/模板/[模板]割点和桥/">
 
 
 <script id="page-configurations">
@@ -92,7 +92,7 @@
   };
 </script>
 
-  <title>「LG P3378」堆 | WYCTSTF</title>
+  <title>「LG P3388」割点 | WYCTSTF</title>
   
 
 
@@ -250,7 +250,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/模板/[模板]堆/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/24/模板/[模板]割点和桥/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="SYH">
@@ -264,7 +264,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            「LG P3378」堆
+            「LG P3388」割点
             
 
           
@@ -281,7 +281,7 @@
                 
               
 
-              <time title="创建时间：2019-10-11 13:10:34" itemprop="dateCreated datePublished" datetime="2019-10-11T13:10:34+08:00">2019-10-11</time>
+              <time title="创建时间：2019-10-24 13:03:36" itemprop="dateCreated datePublished" datetime="2019-10-24T13:03:36+08:00">2019-10-24</time>
             </span>
           
             
@@ -292,7 +292,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-24 12:54:33" itemprop="dateModified" datetime="2019-10-24T12:54:33+08:00">2019-10-24</time>
+                <time title="修改时间：2019-10-25 15:55:34" itemprop="dateModified" datetime="2019-10-25T15:55:34+08:00">2019-10-25</time>
               </span>
             
           
@@ -325,14 +325,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>复习一波手写二叉堆的模板，以免初赛碰到没认出来导致场面一度尴尬</p>
+        <p>割点的模板</p>
 <a id="more"></a>
 
-<p>这篇<a href="https://www.cnblogs.com/henry-1202/p/9307927.html" target="_blank" rel="noopener">博客</a>写的还是不错的</p>
-<h2 id="操作："><a href="#操作：" class="headerlink" title="操作："></a>操作：</h2><h3 id="插入："><a href="#插入：" class="headerlink" title="插入："></a>插入：</h3><p>将一个元素放到堆尾，比较和父节点的大小不断进行交换，一直到不满足条件为止</p>
-<h3 id="查询："><a href="#查询：" class="headerlink" title="查询："></a>查询：</h3><p>直接输出堆顶，正常情况下我们都使用数组保存二叉树所以直接输出heap[1]即可</p>
-<h3 id="取出堆顶元素："><a href="#取出堆顶元素：" class="headerlink" title="取出堆顶元素："></a>取出堆顶元素：</h3><p>把堆顶和堆尾交换，然后一直把堆顶向下交换即可</p>
-<h2 id="Code："><a href="#Code：" class="headerlink" title="Code："></a>Code：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e6</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> h[N],n,siz;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)) f=(ch==<span class="string">'-'</span>)?<span class="number">-1</span>:<span class="number">1</span>,ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch)) x=x*<span class="number">10</span>+(ch-<span class="string">'0'</span>),ch=getchar();</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ins</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    h[++siz]=x;</span><br><span class="line">    <span class="keyword">int</span> now=siz;</span><br><span class="line">    <span class="keyword">while</span>(now&gt;<span class="number">1</span> &amp;&amp; h[now]&lt;h[now&gt;&gt;<span class="number">1</span>])</span><br><span class="line">        swap(h[now],h[now&gt;&gt;<span class="number">1</span>]),now&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get</span><span class="params">()</span></span>&#123;</span><br><span class="line">    swap(h[siz--],h[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">int</span> now=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>((now&lt;&lt;<span class="number">1</span>)&lt;=siz)&#123;</span><br><span class="line">        <span class="keyword">int</span> nxt=now&lt;&lt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>((nxt|<span class="number">1</span>)&lt;=siz&amp;&amp;h[nxt|<span class="number">1</span>]&lt;h[nxt]) nxt++;</span><br><span class="line">        <span class="keyword">if</span>(h[nxt]&lt;h[now]) swap(h[now],h[nxt]);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        now=nxt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> op,x;</span><br><span class="line">    n=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        op=read();</span><br><span class="line">        <span class="keyword">if</span>(op==<span class="number">1</span>)&#123;</span><br><span class="line">            x=read();</span><br><span class="line">            ins(x);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(op==<span class="number">2</span>)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;h[<span class="number">1</span>]&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> get();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,cnt,num,root,sum;</span><br><span class="line"><span class="keyword">int</span> dfn[N],low[N];</span><br><span class="line"><span class="keyword">int</span> head[N],ver[N*<span class="number">5</span>],nxt[N*<span class="number">5</span>];</span><br><span class="line"><span class="keyword">bool</span> cut[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)) f=(ch==<span class="string">'-'</span>)?<span class="number">-1</span>:<span class="number">1</span>,ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch)) x=x*<span class="number">10</span>+(ch-<span class="string">'0'</span>),ch=getchar();</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    ver[++cnt]=y,nxt[cnt]=head[x],head[x]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    dfn[x]=low[x]= ++num;</span><br><span class="line">    <span class="keyword">int</span> flag=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=head[x];i;i=nxt[i])&#123;</span><br><span class="line">        <span class="keyword">int</span> y=ver[i];</span><br><span class="line">        <span class="keyword">if</span>(!dfn[y])&#123;</span><br><span class="line">            tarjan(y);</span><br><span class="line">            low[x]=min(low[x],low[y]);</span><br><span class="line">            <span class="keyword">if</span>(low[y]&gt;=dfn[x])&#123;</span><br><span class="line">                flag++;</span><br><span class="line">                <span class="comment">/* 如果不是根节点或者是根节点并且满足条件的y的num&gt;=2 */</span></span><br><span class="line">                <span class="keyword">if</span>(x!=root || flag&gt;<span class="number">1</span>) cut[x]=<span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> low[x]=min(low[x],dfn[y]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    n=read(),m=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> x,y;</span><br><span class="line">        x=read(),y=read();</span><br><span class="line">        <span class="keyword">if</span>(x==y) <span class="keyword">continue</span>;</span><br><span class="line">        add(x,y),add(y,x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">if</span>(!dfn[i]) &#123;root=i,tarjan(i);&#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(cut[i]) sum++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;sum&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(cut[i]) <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -349,7 +345,7 @@
             
               <a href="/tags/算法模板/" rel="tag"># 算法模板</a>
             
-              <a href="/tags/二叉堆/" rel="tag"># 二叉堆</a>
+              <a href="/tags/tarjan/" rel="tag"># tarjan</a>
             
           </div>
         
@@ -359,8 +355,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/10/09/模板/[模板]线段树1/" rel="next" title="「LG P3373」线段树1">
-                  <i class="fa fa-chevron-left"></i> 「LG P3373」线段树1
+                <a href="/2019/10/22/洛谷题解/LGP1082同余方程/" rel="next" title="「LG P1082」同余方程">
+                  <i class="fa fa-chevron-left"></i> 「LG P1082」同余方程
                 </a>
               
             </div>
@@ -369,8 +365,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/10/11/模板/[模板]并查集/" rel="prev" title="「LG P3367」并查集">
-                  「LG P3367」并查集 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/10/25/学习笔记/割点和桥/" rel="prev" title="Tarjan与无向图的割点和桥">
+                  Tarjan与无向图的割点和桥 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -417,7 +413,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作："><span class="nav-number">1.</span> <span class="nav-text">操作：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入："><span class="nav-number">1.1.</span> <span class="nav-text">插入：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询："><span class="nav-number">1.2.</span> <span class="nav-text">查询：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#取出堆顶元素："><span class="nav-number">1.3.</span> <span class="nav-text">取出堆顶元素：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code："><span class="nav-number">2.</span> <span class="nav-text">Code：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">1.</span> <span class="nav-text">Code</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
