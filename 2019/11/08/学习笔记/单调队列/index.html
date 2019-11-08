@@ -66,19 +66,19 @@
   };
 </script>
 
-  <meta name="description" content="复习一波手写二叉堆的模板，以免初赛碰到没认出来导致场面一度尴尬">
-<meta name="keywords" content="算法模板,二叉堆">
+  <meta name="description" content="浅析单调队列">
+<meta name="keywords" content="学习笔记,单调队列">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「LG P3378」堆">
-<meta property="og:url" content="http://yoursite.com/2019/10/11/模板/[模板]堆/index.html">
+<meta property="og:title" content="「单调队列」">
+<meta property="og:url" content="http://yoursite.com/2019/11/08/学习笔记/单调队列/index.html">
 <meta property="og:site_name" content="WYCTSTF">
-<meta property="og:description" content="复习一波手写二叉堆的模板，以免初赛碰到没认出来导致场面一度尴尬">
+<meta property="og:description" content="浅析单调队列">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-24T04:54:33.801Z">
+<meta property="og:updated_time" content="2019-11-08T00:36:54.485Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="「LG P3378」堆">
-<meta name="twitter:description" content="复习一波手写二叉堆的模板，以免初赛碰到没认出来导致场面一度尴尬">
-  <link rel="canonical" href="http://yoursite.com/2019/10/11/模板/[模板]堆/">
+<meta name="twitter:title" content="「单调队列」">
+<meta name="twitter:description" content="浅析单调队列">
+  <link rel="canonical" href="http://yoursite.com/2019/11/08/学习笔记/单调队列/">
 
 
 <script id="page-configurations">
@@ -92,7 +92,7 @@
   };
 </script>
 
-  <title>「LG P3378」堆 | WYCTSTF</title>
+  <title>「单调队列」 | WYCTSTF</title>
   
 
 
@@ -250,7 +250,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/模板/[模板]堆/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/学习笔记/单调队列/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="SYH">
@@ -264,7 +264,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            「LG P3378」堆
+            「单调队列」
             
 
           
@@ -281,20 +281,8 @@
                 
               
 
-              <time title="创建时间：2019-10-11 13:10:34" itemprop="dateCreated datePublished" datetime="2019-10-11T13:10:34+08:00">2019-10-11</time>
+              <time title="创建时间：2019-11-08 08:36:54" itemprop="dateCreated datePublished" datetime="2019-11-08T08:36:54+08:00">2019-11-08</time>
             </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-24 12:54:33" itemprop="dateModified" datetime="2019-10-24T12:54:33+08:00">2019-10-24</time>
-              </span>
-            
           
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -315,6 +303,8 @@
           
 
           
+            <div class="post-description">浅析单调队列</div>
+          
 
         </div>
       </header>
@@ -325,14 +315,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>复习一波手写二叉堆的模板，以免初赛碰到没认出来导致场面一度尴尬</p>
-<a id="more"></a>
+        <h2 id="例题引入"><a href="#例题引入" class="headerlink" title="例题引入"></a>例题引入</h2><p>给定一个长度为N的序列，从中找出一段长度不超过M的连续子序列，使得和最大</p>
+<h2 id="思考："><a href="#思考：" class="headerlink" title="思考："></a>思考：</h2><p>维护一个前缀和$s[i]$，枚举左右端点$j$，$i$，使得$s[i]-s[j-1]尽可能地大$，时间复杂度为O(nm)</p>
+<p>发现对于每一个$k \in [j,i]，如果s[k]&lt;=s[j]$，那么相比$j$，$k$显然是一个更好的选择</p>
+<p>不难发现，对于每一个右端点$i$，可能成为最优策略的左端点<strong>策略集合</strong>一定是一个<strong>下标位置递增，维护的值也单调</strong>，此处就是维护前缀和单调<strong>递增</strong>的情况</p>
+<p>考虑<strong>使用一个队列维护左端点的下标值</strong>，对应当前队头的决策<strong>不满足条件</strong>(此处为超出限定的长度M)，我们才<strong>退而求其次</strong>的选择一个次优解，这就是原题中维护前缀和递增的原因</p>
+<p>可以证明，对于每个$q.front()$，对之后长度不超过M的右端点的最优左端点都成立</p>
+<p>随着右端点向后扫描，对每个$i$执行下述三个操作：</p>
+<ol>
+<li>判断队头决策与$i$的距离是否超出M，若超出则出队</li>
+<li>此时队头决策就是右端点为$i$时，对左端点$j$的最优选择</li>
+<li>不断删除队尾决策，直到$s[q.tail()]\leq s[i]$，i作为一个新的决策入队</li>
+</ol>
+<h3 id="如何理解第三步操作？"><a href="#如何理解第三步操作？" class="headerlink" title="如何理解第三步操作？"></a>如何理解第三步操作？</h3><p>对于$i$之前的序列，都得到过最优解，那么他们也可以作为左端点备用选择，放到队尾，因为维护了一个单调性队列，可以确保轮到i作为队头决策时，$i$是最优选择</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">while</span>(<span class="selector-tag">s</span><span class="selector-attr">[q.front()]</span>&gt;<span class="selector-tag">s</span><span class="selector-attr">[i]</span>) <span class="selector-tag">q</span><span class="selector-class">.pop_back</span>();</span><br><span class="line"><span class="selector-tag">q</span><span class="selector-class">.push_back</span>(<span class="selector-tag">i</span>)</span><br></pre></td></tr></table></figure>
 
-<p>这篇<a href="https://www.cnblogs.com/henry-1202/p/9307927.html" target="_blank" rel="noopener">博客</a>写的还是不错的</p>
-<h2 id="操作："><a href="#操作：" class="headerlink" title="操作："></a>操作：</h2><h3 id="插入："><a href="#插入：" class="headerlink" title="插入："></a>插入：</h3><p>将一个元素放到堆尾，比较和父节点的大小不断进行交换，一直到不满足条件为止</p>
-<h3 id="查询："><a href="#查询：" class="headerlink" title="查询："></a>查询：</h3><p>直接输出堆顶，正常情况下我们都使用数组保存二叉树所以直接输出heap[1]即可</p>
-<h3 id="取出堆顶元素："><a href="#取出堆顶元素：" class="headerlink" title="取出堆顶元素："></a>取出堆顶元素：</h3><p>把堆顶和堆尾交换，然后一直把堆顶向下交换即可</p>
-<h2 id="Code："><a href="#Code：" class="headerlink" title="Code："></a>Code：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e6</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> h[N],n,siz;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)) f=(ch==<span class="string">'-'</span>)?<span class="number">-1</span>:<span class="number">1</span>,ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch)) x=x*<span class="number">10</span>+(ch-<span class="string">'0'</span>),ch=getchar();</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ins</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    h[++siz]=x;</span><br><span class="line">    <span class="keyword">int</span> now=siz;</span><br><span class="line">    <span class="keyword">while</span>(now&gt;<span class="number">1</span> &amp;&amp; h[now]&lt;h[now&gt;&gt;<span class="number">1</span>])</span><br><span class="line">        swap(h[now],h[now&gt;&gt;<span class="number">1</span>]),now&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get</span><span class="params">()</span></span>&#123;</span><br><span class="line">    swap(h[siz--],h[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">int</span> now=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>((now&lt;&lt;<span class="number">1</span>)&lt;=siz)&#123;</span><br><span class="line">        <span class="keyword">int</span> nxt=now&lt;&lt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>((nxt|<span class="number">1</span>)&lt;=siz&amp;&amp;h[nxt|<span class="number">1</span>]&lt;h[nxt]) nxt++;</span><br><span class="line">        <span class="keyword">if</span>(h[nxt]&lt;h[now]) swap(h[now],h[nxt]);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        now=nxt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> op,x;</span><br><span class="line">    n=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        op=read();</span><br><span class="line">        <span class="keyword">if</span>(op==<span class="number">1</span>)&#123;</span><br><span class="line">            x=read();</span><br><span class="line">            ins(x);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(op==<span class="number">2</span>)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;h[<span class="number">1</span>]&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> get();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码就维护了单调性</p>
+<h2 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h2><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;bits/stdc++.h&gt;</span></span><br><span class="line"><span class="comment">#define int long long</span></span><br><span class="line">using namespace std;</span><br><span class="line">const <span class="keyword">int</span> N=<span class="number">1</span>e5+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> n,<span class="keyword">m</span>,front,back,ans;</span><br><span class="line"><span class="keyword">int</span> a[N],<span class="string">q[N]</span>,<span class="keyword">s</span>[N];</span><br><span class="line">signed main()&#123;</span><br><span class="line">    scanf(<span class="string">"%lld%lld"</span>,&amp;n,&amp;<span class="keyword">m</span>);</span><br><span class="line">    front=back=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        scanf(<span class="string">"%lld"</span>,a+i),<span class="keyword">s</span>[i]=<span class="keyword">s</span>[i-<span class="number">1</span>]+a[i];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">while</span>(front&lt;=back &amp;&amp; <span class="keyword">s</span>[<span class="string">q[back]</span>-<span class="number">1</span>]&gt;<span class="keyword">s</span>[i])&#123;</span><br><span class="line">            back--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="string">q[++back]</span>=i-<span class="number">1</span>;</span><br><span class="line">        cout&lt;&lt;<span class="string">q[back]</span>&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line">        ans=max(ans,<span class="keyword">s</span>[i]-<span class="keyword">s</span>[<span class="string">q[back]</span>-<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">while</span>(i-<span class="string">q[front]</span>&gt;<span class="keyword">m</span>) front++;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="单调性参考例题："><a href="#单调性参考例题：" class="headerlink" title="单调性参考例题："></a>单调性参考例题：</h2><ul>
+<li><a href="https://www.luogu.org/problem/P1886" target="_blank" rel="noopener">P1886 滑动窗口</a></li>
+<li><a href="https://www.luogu.org/problem/P2422" target="_blank" rel="noopener">P2422 良好的感觉</a></li>
+</ul>
+
     </div>
 
     
@@ -347,9 +352,9 @@
           
           <div class="post-tags">
             
-              <a href="/tags/算法模板/" rel="tag"># 算法模板</a>
+              <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
             
-              <a href="/tags/二叉堆/" rel="tag"># 二叉堆</a>
+              <a href="/tags/单调队列/" rel="tag"># 单调队列</a>
             
           </div>
         
@@ -359,8 +364,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/10/09/模板/[模板]线段树1/" rel="next" title="「LG P3373」线段树1">
-                  <i class="fa fa-chevron-left"></i> 「LG P3373」线段树1
+                <a href="/2019/11/07/模板/[模板]LCA/" rel="next" title="「最近公共祖先-LCA」">
+                  <i class="fa fa-chevron-left"></i> 「最近公共祖先-LCA」
                 </a>
               
             </div>
@@ -368,10 +373,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/10/11/模板/[模板]并查集/" rel="prev" title="「LG P3367」并查集">
-                  「LG P3367」并查集 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -417,7 +418,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作："><span class="nav-number">1.</span> <span class="nav-text">操作：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入："><span class="nav-number">1.1.</span> <span class="nav-text">插入：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询："><span class="nav-number">1.2.</span> <span class="nav-text">查询：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#取出堆顶元素："><span class="nav-number">1.3.</span> <span class="nav-text">取出堆顶元素：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code："><span class="nav-number">2.</span> <span class="nav-text">Code：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#例题引入"><span class="nav-number">1.</span> <span class="nav-text">例题引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考："><span class="nav-number">2.</span> <span class="nav-text">思考：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何理解第三步操作？"><span class="nav-number">2.1.</span> <span class="nav-text">如何理解第三步操作？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现："><span class="nav-number">3.</span> <span class="nav-text">代码实现：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单调性参考例题："><span class="nav-number">4.</span> <span class="nav-text">单调性参考例题：</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -569,6 +570,58 @@
 
   
 
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
   
 
   
