@@ -336,14 +336,16 @@
 <p>但是，仅仅按照上述的方法进行$m$轮模拟肯定会T飞</p>
 <p>设$x_1,x_2$为非负整数，当$x_1\geq x_2$时，有$\lfloor{px_1}\rfloor+q\geq\lfloor{px_2}\rfloor+pq$</p>
 <p>可理解为$\lfloor{px_1+q}\rfloor\geq\lfloor{p(x_2+q)}\rfloor$</p>
-<p>又因为有</p>
-<script type="math/tex; mode=display">x_1-x_2\geq p(x_1-x_2)</script><p>所以有</p>
-<script type="math/tex; mode=display">x_1-px_1\geq x_2-px_2\geq x_2-p(x_2+q)</script><p>进一步有</p>
-<script type="math/tex; mode=display">x_1-\lfloor{px_1}\rfloor+q=\lfloor{x_1-px_1}\rfloor+q\geq \lfloor{x_2-p(x_2+q)}\rfloor+q=x_2+q-\lfloor{p(x_2+q)}\rfloor</script><p>意义是：若$x_1$在$x_2$前被取出集合，则在一秒后，$x_1$分成两个数$\lfloor{px_1}\rfloor+q$和$x-1-\lfloor{px_1}\rfloor+q$分别不小于$x_2$分成的两个数$\lfloor{p(x_2+q)}\rfloor$和$x_2+q-\lfloor{p(x_2+q)}\rfloor$</p>
+<p>又因为有<br>$$x_1-x_2\geq p(x_1-x_2)$$</p>
+<p>所以有<br>$$x_1-px_1\geq x_2-px_2\geq x_2-p(x_2+q)$$</p>
+<p>进一步有</p>
+<p>$$x_1-\lfloor{px_1}\rfloor+q=\lfloor{x_1-px_1}\rfloor+q\geq \lfloor{x_2-p(x_2+q)}\rfloor+q=x_2+q-\lfloor{p(x_2+q)}\rfloor$$</p>
+<p>意义是：若$x_1$在$x_2$前被取出集合，则在一秒后，$x_1$分成两个数$\lfloor{px_1}\rfloor+q$和$x-1-\lfloor{px_1}\rfloor+q$分别不小于$x_2$分成的两个数$\lfloor{p(x_2+q)}\rfloor$和$x_2+q-\lfloor{p(x_2+q)}\rfloor$</p>
 <p>那么，不仅从集合中取出的数是单调递减的，新产生的两类数值也是随时间单调递减的</p>
 <p>我们建立三个队列$A,B,C$</p>
 <p>A维护初始的n个数，从大到小排序，队列$B$保存每秒新产生的$\lfloor{px}\rfloor$的那一段数值。队列$C$保存1剩下的一类数值，单调性保证数据的顺序同步，此时集合中最大的数就是队列$A,B,C$的三个队首之一，配合集合的偏移量$delta$，整个算法的时间复杂度为$O(m+nlogn)$</p>
 <h2 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* PP2728 蚯蚓 */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt;q1;</span><br><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;q2,q3;</span><br><span class="line"><span class="keyword">int</span> n,m,q,u,v,t;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxLen</span><span class="params">(<span class="keyword">int</span> t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x1=<span class="number">-1</span>,x2=<span class="number">-1</span>,x3=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span>(!q1.empty()) x1=q1.top()+t*q;</span><br><span class="line">    <span class="keyword">if</span>(!q2.empty()) x2=q2.front()+t*q;</span><br><span class="line">    <span class="keyword">if</span>(!q3.empty()) x3=q3.front()+t*q;</span><br><span class="line">    <span class="keyword">if</span>(x1&gt;=x2 &amp;&amp; x1&gt;=x3)&#123;q1.pop();<span class="keyword">return</span> x1;&#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(x2&gt;=x1&amp;&amp;x2&gt;=x3)&#123;q2.pop();<span class="keyword">return</span> x2;&#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;q3.pop();<span class="keyword">return</span> x3;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// freopen("earthworm.in","r",stdin);</span></span><br><span class="line">    <span class="comment">// freopen("earthworm.out","w",stdout);</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d%d%d%d"</span>,&amp;n,&amp;m,&amp;q,&amp;u,&amp;v,&amp;t);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) &#123;<span class="keyword">int</span> x;<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;x),q1.push(x);&#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> t1,t2,len=MaxLen(i<span class="number">-1</span>);</span><br><span class="line">        t1=len*u/v;t2=len-t1;</span><br><span class="line">        q2.push(t1-i*q);q3.push(t2-i*q);</span><br><span class="line">        <span class="keyword">if</span>(i%t==<span class="number">0</span>) <span class="built_in">cout</span>&lt;&lt;len&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m+n;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> len=MaxLen(m);</span><br><span class="line">        <span class="keyword">if</span>(i%t==<span class="number">0</span>) <span class="built_in">cout</span>&lt;&lt;len&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -380,6 +382,10 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/11/11/学习笔记/二分图匹配/" rel="prev" title="基础二分图">
+                  基础二分图 <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -444,7 +450,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -470,7 +476,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
