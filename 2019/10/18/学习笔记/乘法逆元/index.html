@@ -67,7 +67,7 @@
 </script>
 
   <meta name="description" content="浅析乘法逆元和几种计算方法">
-<meta name="keywords" content="数论,乘法逆元,学习笔记,扩展欧几里得">
+<meta name="keywords" content="学习笔记,数论,乘法逆元,扩展欧几里得">
 <meta property="og:type" content="article">
 <meta property="og:title" content="乘法逆元">
 <meta property="og:url" content="http://yoursite.com/2019/10/18/学习笔记/乘法逆元/index.html">
@@ -319,19 +319,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>顾名思义，就是模意义下乘法运算的逆元</p>
-<a id="more"></a>
+        <p>顾名思义，就是模意义下乘法运算的逆元<br><a id="more"></a></p>
 <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>如果一个线性同余方程$ax\equiv 1\ (mod \ b)$，则$x$称为$a$对$b$的逆元，记作$a^{-1}$</p>
 <h2 id="Section1-扩欧"><a href="#Section1-扩欧" class="headerlink" title="Section1 - 扩欧"></a>Section1 - 扩欧</h2><blockquote>
 <p>本质和解线性同余方程一样</p>
 </blockquote>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> &amp;x,<span class="keyword">int</span> &amp;y)</span></span>&#123; <span class="comment">// 扩欧可以返回ax+by=gcd(a,b)的一组整数解</span></span><br><span class="line">    <span class="keyword">if</span>(!b)&#123;x=<span class="number">1</span>,y=<span class="number">0</span>;<span class="keyword">return</span> a; <span class="comment">// 返回特解x=1,y=0并正常的求解gcd</span></span><br><span class="line">    <span class="keyword">int</span> res=exgcd(b,a%b,x,y);</span><br><span class="line">    <span class="keyword">int</span> tmp=x;</span><br><span class="line">    x=y,t=tmp-(a/b)*y;</span><br><span class="line">    <span class="keyword">return</span> res; <span class="comment">// 同时返回gcd值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="title">exgcd_inv</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> d,x,y;</span><br><span class="line">    d=exgcd(a,n,x,y);</span><br><span class="line">    <span class="keyword">return</span> d==<span class="number">1</span>?(x+n)%n:<span class="number">-1</span>; <span class="comment">// -1表示没有乘法逆元</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="Section2-费马小定理"><a href="#Section2-费马小定理" class="headerlink" title="Section2 - 费马小定理"></a>Section2 - 费马小定理</h2><blockquote>
-<p>当$p$为质数时(使用条件)，有$a^{p-1}\equiv 1 \ (mod \ p)$，可变为$a*a^{p-2} \equiv 1 \ (mod \ p)$，此时$a^{p-2}就是$a$对$p$的乘法逆元$</p>
+<p>当$p$为质数时(使用条件)，有$a^{p-1}\equiv 1 \ (mod \ p)$，可变为$a*a^{p-2} \equiv 1 \ (mod \ p)$，此时$a^{p-2}就是$a$对$p$的乘法逆元$<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">QuickPow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=b;</span><br><span class="line">    <span class="keyword">for</span>(;a;a&gt;&gt;=<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a&amp;<span class="number">1</span>)</span><br><span class="line">            ans=(ans*b%p);</span><br><span class="line">        ans=ans*ans%p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fermat_inv</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> QuickPow(a,n<span class="number">-2</span>,n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">QuickPow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=b;</span><br><span class="line">    <span class="keyword">for</span>(;a;a&gt;&gt;=<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a&amp;<span class="number">1</span>)</span><br><span class="line">            ans=(ans*b%p);</span><br><span class="line">        ans=ans*ans%p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fermat_inv</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> QuickPow(a,n<span class="number">-2</span>,n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>还有一种线性筛逆元的解法，等哪天有时间补上，先复习初赛续命…</p>
 <hr>
 <p><a href="https://www.luogu.org/problem/P1082" target="_blank" rel="noopener">模板1</a></p>
@@ -351,11 +347,11 @@
           
           <div class="post-tags">
             
+              <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+            
               <a href="/tags/数论/" rel="tag"># 数论</a>
             
               <a href="/tags/乘法逆元/" rel="tag"># 乘法逆元</a>
-            
-              <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
             
               <a href="/tags/扩展欧几里得/" rel="tag"># 扩展欧几里得</a>
             
