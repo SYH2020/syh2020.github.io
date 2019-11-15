@@ -66,19 +66,19 @@
   };
 </script>
 
-  <meta name="description" content="浅析乘法逆元和几种计算方法">
-<meta name="keywords" content="学习笔记,数论,乘法逆元,扩展欧几里得">
+  <meta name="description" content="浅析逆序对的求法">
+<meta name="keywords" content="算法模板,树状数组,归并排序">
 <meta property="og:type" content="article">
-<meta property="og:title" content="乘法逆元">
-<meta property="og:url" content="http://yoursite.com/2019/10/18/学习笔记/乘法逆元/index.html">
+<meta property="og:title" content="逆序对求解">
+<meta property="og:url" content="http://yoursite.com/2019/11/15/题解/逆序对/index.html">
 <meta property="og:site_name" content="WYCTSTF">
-<meta property="og:description" content="浅析乘法逆元和几种计算方法">
+<meta property="og:description" content="浅析逆序对的求法">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-18T11:03:34.178Z">
+<meta property="og:updated_time" content="2019-11-15T11:30:51.301Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="乘法逆元">
-<meta name="twitter:description" content="浅析乘法逆元和几种计算方法">
-  <link rel="canonical" href="http://yoursite.com/2019/10/18/学习笔记/乘法逆元/">
+<meta name="twitter:title" content="逆序对求解">
+<meta name="twitter:description" content="浅析逆序对的求法">
+  <link rel="canonical" href="http://yoursite.com/2019/11/15/题解/逆序对/">
 
 
 <script id="page-configurations">
@@ -92,7 +92,7 @@
   };
 </script>
 
-  <title>乘法逆元 | WYCTSTF</title>
+  <title>逆序对求解 | WYCTSTF</title>
   
 
 
@@ -250,7 +250,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/18/学习笔记/乘法逆元/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/15/题解/逆序对/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="SYH">
@@ -264,7 +264,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            乘法逆元
+            逆序对求解
             
 
           
@@ -281,7 +281,7 @@
                 
               
 
-              <time title="创建时间：2019-10-18 16:23:51 / 修改时间：19:03:34" itemprop="dateCreated datePublished" datetime="2019-10-18T16:23:51+08:00">2019-10-18</time>
+              <time title="创建时间：2019-11-15 18:50:52 / 修改时间：19:30:51" itemprop="dateCreated datePublished" datetime="2019-11-15T18:50:52+08:00">2019-11-15</time>
             </span>
           
             
@@ -307,7 +307,7 @@
           
 
           
-            <div class="post-description">浅析乘法逆元和几种计算方法</div>
+            <div class="post-description">浅析逆序对的求法</div>
           
 
         </div>
@@ -319,24 +319,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>顾名思义，就是模意义下乘法运算的逆元</p>
-<a id="more"></a>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>如果一个线性同余方程$ax\equiv 1\ (mod \ b)$，则$x$称为$a$对$b$的逆元，记作$a^{-1}$</p>
-<h2 id="Section1-扩欧"><a href="#Section1-扩欧" class="headerlink" title="Section1 - 扩欧"></a>Section1 - 扩欧</h2><blockquote>
-<p>本质和解线性同余方程一样</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> &amp;x,<span class="keyword">int</span> &amp;y)</span></span>&#123; <span class="comment">// 扩欧可以返回ax+by=gcd(a,b)的一组整数解</span></span><br><span class="line">    <span class="keyword">if</span>(!b)&#123;x=<span class="number">1</span>,y=<span class="number">0</span>;<span class="keyword">return</span> a; <span class="comment">// 返回特解x=1,y=0并正常的求解gcd</span></span><br><span class="line">    <span class="keyword">int</span> res=exgcd(b,a%b,x,y);</span><br><span class="line">    <span class="keyword">int</span> tmp=x;</span><br><span class="line">    x=y,t=tmp-(a/b)*y;</span><br><span class="line">    <span class="keyword">return</span> res; <span class="comment">// 同时返回gcd值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="title">exgcd_inv</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> d,x,y;</span><br><span class="line">    d=exgcd(a,n,x,y);</span><br><span class="line">    <span class="keyword">return</span> d==<span class="number">1</span>?(x+n)%n:<span class="number">-1</span>; <span class="comment">// -1表示没有乘法逆元</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p><a href="https://www.luogu.org/problem/P1908" target="_blank" rel="noopener">逆序对模板题</a></p>
+<h2 id="归并排序求解逆序对："><a href="#归并排序求解逆序对：" class="headerlink" title="归并排序求解逆序对："></a>归并排序求解逆序对：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> n,a[<span class="number">500010</span>],c[<span class="number">500010</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">msort</span><span class="params">(<span class="keyword">int</span> b,<span class="keyword">int</span> e)</span></span>&#123; <span class="comment">// begin,end</span></span><br><span class="line">    <span class="keyword">if</span>(b==e)<span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> mid=(b+e)&gt;&gt;<span class="number">1</span>,i=b,j=mid+<span class="number">1</span>,k=b;</span><br><span class="line">    msort(b,mid),msort(mid+<span class="number">1</span>,e);</span><br><span class="line">    <span class="keyword">while</span>(i&lt;=mid&amp;&amp;j&lt;=e)</span><br><span class="line">        <span class="keyword">if</span>(a[i]&lt;=a[j]) c[k++]=a[i++];</span><br><span class="line">        <span class="keyword">else</span> c[k++]=a[j++], ans+=mid-i+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;=mid)c[k++]=a[i++];</span><br><span class="line">    <span class="keyword">while</span>(j&lt;=e)c[k++]=a[j++];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> l=b;l&lt;=e;l++)a[l]=c[l];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">scanf</span>(<span class="string">"%d"</span>,a+i);</span><br><span class="line">    msort(<span class="number">1</span>,n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Section2-费马小定理"><a href="#Section2-费马小定理" class="headerlink" title="Section2 - 费马小定理"></a>Section2 - 费马小定理</h2><blockquote>
-<p>当$p$为质数时(使用条件)，有$a^{p-1}\equiv 1 \ (mod \ p)$，可变为$a*a^{p-2} \equiv 1 \ (mod \ p)$，此时$a^{p-2}就是$a$对$p$的乘法逆元$</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">QuickPow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=b;</span><br><span class="line">    <span class="keyword">for</span>(;a;a&gt;&gt;=<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a&amp;<span class="number">1</span>)</span><br><span class="line">            ans=(ans*b%p);</span><br><span class="line">        ans=ans*ans%p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fermat_inv</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> QuickPow(a,n<span class="number">-2</span>,n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>还有一种线性筛逆元的解法，等哪天有时间补上，先复习初赛续命…</p>
-<hr>
-<p><a href="https://www.luogu.org/problem/P1082" target="_blank" rel="noopener">模板1</a></p>
-<p><a href="https://www.luogu.org/problem/P3811" target="_blank" rel="noopener">模板2</a></p>
-
+<h2 id="树状数组求逆序对"><a href="#树状数组求逆序对" class="headerlink" title="树状数组求逆序对"></a>树状数组求逆序对</h2><p>树状数组怎么求逆序对？</p>
+<p>根据数值建立树状数组，按照序列值从小到大排序，将数值对应的位置+1，那么<strong>有$a_i$与树状数组内比$a_i$大的数值都构成逆序对</strong>，考虑离散化</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> low(a) ((a)&amp;(-a))</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">5e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> c[N],r[N],n; <span class="comment">// c-树状数组,**r[i]表示原序列a[i]的位置**</span></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> pos,val;</span><br><span class="line">&#125;a[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> Node &amp;a,<span class="keyword">const</span> Node &amp;b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.val==b.val?a.pos&lt;b.pos:a.val&lt;b.val;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> p,<span class="keyword">int</span> d)</span></span>&#123; <span class="keyword">for</span>(;p&lt;=n;p+=low(p)) c[p]+=d; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(;p;p-=low(p)) sum+=c[p];</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i].val),a[i].pos=i;</span><br><span class="line">    <span class="built_in">std</span>::sort(a+<span class="number">1</span>,a+<span class="number">1</span>+n,cmp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) r[a[i].pos]=i; <span class="comment">// 离散化</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) add(r[i],<span class="number">1</span>),ans+=i-query(r[i]); <span class="comment">// 树状数组求逆序对</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -351,13 +339,11 @@
           
           <div class="post-tags">
             
-              <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+              <a href="/tags/算法模板/" rel="tag"># 算法模板</a>
             
-              <a href="/tags/数论/" rel="tag"># 数论</a>
+              <a href="/tags/树状数组/" rel="tag"># 树状数组</a>
             
-              <a href="/tags/乘法逆元/" rel="tag"># 乘法逆元</a>
-            
-              <a href="/tags/扩展欧几里得/" rel="tag"># 扩展欧几里得</a>
+              <a href="/tags/归并排序/" rel="tag"># 归并排序</a>
             
           </div>
         
@@ -367,8 +353,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/10/17/模板/[模板]康托展开/" rel="next" title="「LG P5367」康托展开">
-                  <i class="fa fa-chevron-left"></i> 「LG P5367」康托展开
+                <a href="/2019/11/15/题解/LightOJ1038/" rel="next" title="Race to 1 Again 数学期望">
+                  <i class="fa fa-chevron-left"></i> Race to 1 Again 数学期望
                 </a>
               
             </div>
@@ -376,10 +362,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/10/22/题解/LGP1082同余方程/" rel="prev" title="「LG P1082」同余方程">
-                  「LG P1082」同余方程 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -425,7 +407,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Section1-扩欧"><span class="nav-number">2.</span> <span class="nav-text">Section1 - 扩欧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Section2-费马小定理"><span class="nav-number">3.</span> <span class="nav-text">Section2 - 费马小定理</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序求解逆序对："><span class="nav-number">1.</span> <span class="nav-text">归并排序求解逆序对：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树状数组求逆序对"><span class="nav-number">2.</span> <span class="nav-text">树状数组求逆序对</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
