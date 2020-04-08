@@ -67,7 +67,7 @@
 </script>
 
   <meta name="description" content="线性同余方程的基础题">
-<meta name="keywords" content="数论,乘法逆元,扩展欧几里得,数学">
+<meta name="keywords" content="扩展欧几里得,数论,数学,乘法逆元">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「LG P1082」同余方程">
 <meta property="og:url" content="http://yoursite.com/2019/10/22/题解/LGP1082同余方程/index.html">
@@ -142,7 +142,7 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <h1 class="site-subtitle" itemprop="description">没有目标的废物</h1>
+        <h1 class="site-subtitle" itemprop="description">It's your reflection looking back to pull you down.</h1>
       
   </div>
 
@@ -325,7 +325,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>线性同余方程的基础题<br><a id="more"></a></p>
+        <p>线性同余方程的基础题</p>
+<a id="more"></a>
 <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>求解$ax \equiv 1 (mod \  b)$的最小整数解</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>可以通过扩展欧几里得算法求解$ax+by=1$</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)) f=(ch==<span class="string">'-'</span>)?<span class="number">-1</span>:<span class="number">1</span>,ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch)) x=x*<span class="number">10</span>+(ch-<span class="string">'0'</span>),ch=getchar();</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Extend_GCD</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> &amp;x,<span class="keyword">int</span> &amp;y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!b)&#123;x=<span class="number">1</span>,y=<span class="number">0</span>;<span class="keyword">return</span> a;&#125;</span><br><span class="line">    <span class="keyword">int</span> d=Extend_GCD(b,a%b,x,y),tmp=x;</span><br><span class="line">    x=y,y=tmp-a/b*y;</span><br><span class="line">    <span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,b,x,y;</span><br><span class="line">    a=read(),b=read();</span><br><span class="line">    <span class="keyword">int</span> gcd=Extend_GCD(a,b,x,y);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;(x+b)%b&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -343,13 +344,13 @@
           
           <div class="post-tags">
             
-              <a href="/tags/数论/" rel="tag"># 数论</a>
-            
-              <a href="/tags/乘法逆元/" rel="tag"># 乘法逆元</a>
-            
               <a href="/tags/扩展欧几里得/" rel="tag"># 扩展欧几里得</a>
             
+              <a href="/tags/数论/" rel="tag"># 数论</a>
+            
               <a href="/tags/数学/" rel="tag"># 数学</a>
+            
+              <a href="/tags/乘法逆元/" rel="tag"># 乘法逆元</a>
             
           </div>
         
