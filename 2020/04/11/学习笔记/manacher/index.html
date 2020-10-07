@@ -66,17 +66,19 @@
   };
 </script>
 
-  <meta name="description" content="SYH&apos;Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WYCTSTF">
-<meta property="og:url" content="http://yoursite.com/categories/OI/page/3/index.html">
+  <meta name="description" content="manacher算法">
+<meta name="keywords" content="字符串,学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Manacher">
+<meta property="og:url" content="http://yoursite.com/2020/04/11/学习笔记/manacher/index.html">
 <meta property="og:site_name" content="WYCTSTF">
-<meta property="og:description" content="SYH&apos;Blog">
+<meta property="og:description" content="manacher算法">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-11T05:47:20.744Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WYCTSTF">
-<meta name="twitter:description" content="SYH&apos;Blog">
-  <link rel="canonical" href="http://yoursite.com/categories/OI/page/3/">
+<meta name="twitter:title" content="Manacher">
+<meta name="twitter:description" content="manacher算法">
+  <link rel="canonical" href="http://yoursite.com/2020/04/11/学习笔记/manacher/">
 
 
 <script id="page-configurations">
@@ -84,13 +86,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>分类: OI | WYCTSTF</title>
+  <title>Manacher | WYCTSTF</title>
   
 
 
@@ -240,317 +242,145 @@
         <div class="content-wrap">
             
 
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-  
-
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">OI
-          <small>分类</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/11/学习笔记/manacher/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="SYH">
+      <meta itemprop="description" content="SYH'Blog">
+      <meta itemprop="image" content="/images\header.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WYCTSTF">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            Manacher
+            
+
+          
         </h2>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-11 13:34:32 / 修改时间：13:47:20" itemprop="dateCreated datePublished" datetime="2020-04-11T13:34:32+08:00">2020-04-11</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OI/" itemprop="url" rel="index">
+                    <span itemprop="name">OI</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <div class="post-description">manacher算法</div>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>给定一个长度为$n$的字符串，要求找出所有对$(i,j)$使得子串$s[i…j]$为一个回文串</p>
+<p>最坏情况下有$O$$($$n^2$$)$个回文串</p>
+<h2 id="概念引入"><a href="#概念引入" class="headerlink" title="概念引入"></a>概念引入</h2><p>引入一种表达回文串的方式：</p>
+<p>对于每个位置$i=0…n-1$，有$d_1[i]$和$d_2[i]$分别表示以$i$为中心的长度为奇数和长度为偶数的回文串个数</p>
+<p>例如，对于字符串$a b a b a c$，有</p>
+<p>$$d_1[3] = 3$$</p>
+<p>这里单个字符本身也算作一个回文串</p>
+<p>对于字符串$cbaabd$，有</p>
+<p>$$d_2[3] = 2$$</p>
+<p>显然，如果以某个位置$i$为中心，若有长度为$l$的回文串，那么就存在长度为$l-2$、$l-4$的回文串</p>
+<p>则$d_1[]$和$d_2[]$两个数组就可以描述字符串中的所有回文串信息</p>
+<h2 id="朴素算法"><a href="#朴素算法" class="headerlink" title="朴素算法"></a>朴素算法</h2><p>可以在$O(n^2)$的时间内计算出答案</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; d1(n), d2(n);</span><br><span class="line"><span class="keyword">for</span> (int <span class="built_in">i</span> = <span class="number">0</span>; <span class="built_in">i</span> &lt; n; <span class="built_in">i</span>++) &#123;</span><br><span class="line">  d1[<span class="built_in">i</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (<span class="number">0</span> &lt;= <span class="built_in">i</span> - d1[<span class="built_in">i</span>] &amp;&amp; <span class="built_in">i</span> + d1[<span class="built_in">i</span>] &lt; n &amp;&amp; s[<span class="built_in">i</span> - d1[<span class="built_in">i</span>]] == s[<span class="built_in">i</span> + d1[<span class="built_in">i</span>]]) &#123;</span><br><span class="line">    d1[<span class="built_in">i</span>]++;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  d2[<span class="built_in">i</span>] = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (<span class="number">0</span> &lt;= <span class="built_in">i</span> - d2[<span class="built_in">i</span>] - <span class="number">1</span> &amp;&amp; <span class="built_in">i</span> + d2[<span class="built_in">i</span>] &lt; n &amp;&amp;</span><br><span class="line">         s[<span class="built_in">i</span> - d2[<span class="built_in">i</span>] - <span class="number">1</span>] == s[<span class="built_in">i</span> + d2[<span class="built_in">i</span>]]) &#123;</span><br><span class="line">    d2[<span class="built_in">i</span>]++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  
-  
 
-  
+    </div>
+
     
-    <div class="collection-year">
-      <h2 class="collection-header">2019</h2>
-    </div>
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-10-11T13:10:34+08:00"
-              content="2019-10-11">
-          10-11
-        </time>
-      </div>
-
-      <h3 class="post-title">
+    
+    
         
-          <a class="post-title-link" href="/2019/10/11/模板/[模板]堆/" itemprop="url">
-            <span itemprop="name">「LG P3378」堆</span>
-          </a>
-        
-      </h3>
+      
 
-    </header>
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/字符串/" rel="tag"># 字符串</a>
+            
+              <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/11/15/题解/逆序对/" rel="next" title="逆序对求解">
+                  <i class="fa fa-chevron-left"></i> 逆序对求解
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
   </article>
-
-
-
+  
   
   
 
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-10-09T00:00:00+08:00"
-              content="2019-10-09">
-          10-09
-        </time>
-      </div>
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/10/09/模板/[模板]线段树1/" itemprop="url">
-            <span itemprop="name">「LG P3373」线段树1</span>
-          </a>
-        
-      </h3>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-10-08T00:00:00+08:00"
-              content="2019-10-08">
-          10-08
-        </time>
-      </div>
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/10/08/题解/LGP2043质因子分解/" itemprop="url">
-            <span itemprop="name">「LG P2043」质因子分解</span>
-          </a>
-        
-      </h3>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-10-06T13:52:25+08:00"
-              content="2019-10-06">
-          10-06
-        </time>
-      </div>
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/10/06/学习笔记/初级线段树/" itemprop="url">
-            <span itemprop="name">初级线段树</span>
-          </a>
-        
-      </h3>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-10-06T00:00:00+08:00"
-              content="2019-10-06">
-          10-06
-        </time>
-      </div>
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/10/06/题解/LGP1120小木棍/" itemprop="url">
-            <span itemprop="name">「LG P1120」小木棍</span>
-          </a>
-        
-      </h3>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-10-04T00:00:00+08:00"
-              content="2019-10-04">
-          10-04
-        </time>
-      </div>
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/10/04/Codeforces/CF1206Div.2/" itemprop="url">
-            <span itemprop="name">Codeforces Round 580(Div.2)</span>
-          </a>
-        
-      </h3>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-10-04T00:00:00+08:00"
-              content="2019-10-04">
-          10-04
-        </time>
-      </div>
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/10/04/训练/CSP初赛知识/" itemprop="url">
-            <span itemprop="name">CSP初赛复习知识点整理</span>
-          </a>
-        
-      </h3>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-10-03T00:00:00+08:00"
-              content="2019-10-03">
-          10-03
-        </time>
-      </div>
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/10/03/学习笔记/Dijkstra/" itemprop="url">
-            <span itemprop="name">Dijkstra</span>
-          </a>
-        
-      </h3>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-10-02T00:00:00+08:00"
-              content="2019-10-02">
-          10-02
-        </time>
-      </div>
-
-      <h3 class="post-title">
-        
-          <a class="post-title-link" href="/2019/10/02/训练/CSPS1大题/" itemprop="url">
-            <span itemprop="name">CSP-S1大题备战</span>
-          </a>
-        
-      </h3>
-
-    </header>
-  </article>
-
-
-
-    </div>
   </div>
-  
-  
-  
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/categories/OI/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/categories/OI/">1</a><a class="page-number" href="/categories/OI/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
-
 
 
           </div>
@@ -567,6 +397,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -579,6 +414,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念引入"><span class="nav-number">2.</span> <span class="nav-text">概念引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#朴素算法"><span class="nav-number">3.</span> <span class="nav-text">朴素算法</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
@@ -742,6 +579,58 @@
 
   
 
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
   
 
   
