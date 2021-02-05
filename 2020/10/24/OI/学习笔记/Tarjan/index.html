@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","width":230,"display":"post","offset":12},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Tarjan在有向图和无向图当中的应用">
+<meta name="keywords" content="学习笔记,Tarjan,强连通分量,割点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tarjan杂谈">
+<meta property="og:url" content="http://yoursite.com/2020/10/24/OI/学习笔记/Tarjan/index.html">
+<meta property="og:site_name" content="SYH">
+<meta property="og:description" content="Tarjan在有向图和无向图当中的应用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-07T07:42:10.540Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tarjan杂谈">
+<meta name="twitter:description" content="Tarjan在有向图和无向图当中的应用">
+  <link rel="canonical" href="http://yoursite.com/2020/10/24/OI/学习笔记/Tarjan/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Tarjan杂谈 | SYH</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SYH</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">改变不了的是过去</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+    
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/24/OI/学习笔记/Tarjan/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="SYH">
+      <meta itemprop="description" content="SYH'Blog">
+      <meta itemprop="image" content="/images\header.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SYH">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            Tarjan杂谈
+            
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-10-24 20:30:59" itemprop="dateCreated datePublished" datetime="2020-10-24T20:30:59+08:00">2020-10-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-07 15:42:10" itemprop="dateModified" datetime="2019-11-07T15:42:10+08:00">2019-11-07</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OI/" itemprop="url" rel="index">
+                    <span itemprop="name">OI</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <div class="post-description">Tarjan在有向图和无向图当中的应用</div>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Part1-无向图的割点-割边"><a href="#Part1-无向图的割点-割边" class="headerlink" title="$Part1$ 无向图的割点\割边"></a>$Part1$ 无向图的割点\割边</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>给定无向图$G \in (V,E)$</p>
+<p>若对于$x \in V$，从图中删去$x$以及所有与$x$关联的边之后，$G$分裂成两个及以上不相连的子图，则称$x$是$G$的<strong>割点</strong></p>
+<p>若对于$e \in E$，从图中删去$e$之后，$G$分裂成两个不相连的子图，则称$e$为$G$的<strong>桥或割边</strong></p>
+<hr>
+<p>Tarjan基于无向图的DFS</p>
+<hr>
+<h2 id="前置知识："><a href="#前置知识：" class="headerlink" title="前置知识："></a>前置知识：</h2><ul>
+<li><p>时间戳</p>
+<p>  在图的DFS过程中，按照每个节点第一次被访问的时间顺序一次给予$1 \to N$的标，该标记被称为 $时间戳$，记为dfn[x]</p>
+</li>
+<li><p>搜索树</p>
+<p>  从无向图中任选一个节点出发DFS，每个节点只访问一次，所有发生递归的边构成一棵树，称为<strong>无向连通图的搜索树</strong>，一般无向图的各个连通块的搜索树构成无向图的<strong>搜索森林</strong></p>
+</li>
+<li><p>追溯值</p>
+<blockquote>
+<p>low[x]表示节点$x$的追溯值</p>
+</blockquote>
+<p>  设$subtree(x)$表示搜索树中以$x$为根节点的子树，$low[x]$为以下节点的dfn的最小值</p>
+<ol>
+<li><p>$subtree(x)$中的节点</p>
+</li>
+<li><p>通过一条不在搜索树上的边，能够到达$subtree(x)$的节点</p>
+<p>计算$low[x]$时先令$low[x]=dfn[x]$，然后考虑每条从$x$出发的边$(x,y)$:</p>
+</li>
+<li><p>若在搜索树上$x$是$y$的父节点，则令$low[x]\ = min(low[x],low[y])$</p>
+</li>
+<li><p>若无向边$(x,y)$不是搜索树上的边，则令$low[x]=min(low[x],dfn[y])$</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="割边的判定："><a href="#割边的判定：" class="headerlink" title="割边的判定："></a>割边的判定：</h2><blockquote>
+<p>无向边$(x,y)$是桥，当且仅当搜索树上存在x的一个子结点y，满足:<br>$$dfn[x]&lt;low[y]$$</p>
+</blockquote>
+<h2 id="证明："><a href="#证明：" class="headerlink" title="证明："></a>证明：</h2><p>根据定义，$dfn[x]&lt;low[y]$说明从$subtree(y)$出发，在不经过$(x,y)$的前提下，不管走哪条边，都无法到达$x$或比$x$更早访问的节点。</p>
+<p>若把$(x,y)$删除，$subtree(y)$封闭</p>
+<h2 id="一些问题以及解决方法"><a href="#一些问题以及解决方法" class="headerlink" title="一些问题以及解决方法"></a>一些问题以及解决方法</h2><p>遍历的是无向图，所以从每个节点$x$出发，总能访问到它的父节点$fa$,$fa$是搜索树上的边，但不是x的子节点，故不能用$fa$的时间来更新$low[x]$</p>
+<p>但是仅仅记录每个节点的父节点，将无法处理重边，当$x$与$fa$之间有多条边时，$(x,fa)$一定不是桥，在重边中，只有一条算是“搜索树上的边”，其他的几条都不算。</p>
+<p>故有重边的时候，$dfn[fa]$可以用来更新$low[x]$</p>
+<p>一个比较好的解决方法是：</p>
+<p>改为记录“递归进入每个节点的边的编号”。编号可理解为在邻接表中存储的边的下标的位置</p>
+<p>这里需要用到“成对变换”的技巧，也就是如果进入了编号为$x$的边，则忽略编号为$x \ xor \ 1$的边</p>
+<p>通过其他的边计算$low[x]$即可</p>
+<p>下面给出代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,tot,num;</span><br><span class="line"><span class="keyword">int</span> h[N],ver[N&lt;&lt;<span class="number">1</span>],nxt[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> dfn[N],low[N];</span><br><span class="line"><span class="keyword">bool</span> bridge[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)) f=(ch==<span class="string">'-'</span>)?<span class="number">-1</span>:<span class="number">1</span>,ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch)) x=x*<span class="number">10</span>+(ch-<span class="string">'0'</span>),ch=getchar();</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> in_edge)</span></span>&#123;</span><br><span class="line">    dfn[x]=low[x]=++num; <span class="comment">// 初始化low[x]=dfn[x]</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=h[u];i;i=nxt[i])&#123;</span><br><span class="line">        <span class="keyword">int</span> y=ver[i];</span><br><span class="line">        <span class="keyword">if</span>(!dfn[y])&#123;</span><br><span class="line">            tarjan(y,i);</span><br><span class="line">            low[x]=min(low[x],low[y]);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(low[y]&gt;dfn[x])</span><br><span class="line">                bridge[i]=bridge[i^<span class="number">1</span>]=<span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(i!=(in_edge^<span class="number">1</span>))</span><br><span class="line">            low[x]=min(low[x],dfn[y]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    n=read(),m=read();</span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">        x=read(),y=read(),add(x,y),add(y,x);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!dfn[i]) tarjan(i,<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;tot;i+=<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(bridge[i])</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,ver[i^<span class="number">1</span>],ver[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="割点的判定："><a href="#割点的判定：" class="headerlink" title="割点的判定："></a>割点的判定：</h2><p>若$x$不是搜索树的根节点($DFS$起点)，则$x$是割点当且仅当搜索树上存在$x$的一个子节点$y$，满足：<br>$$dfn[x]\  \leq \ low[y]$$</p>
+<p>特别的，若$x$是搜索树的根节点，则$x$是搜索树的根节点，则$x$是割点当且仅当搜索树上存在至少两个子节点$y1,y2$满足上述条件</p>
+<h2 id="请自己尝试证明，方法与割边证明过程相似"><a href="#请自己尝试证明，方法与割边证明过程相似" class="headerlink" title="请自己尝试证明，方法与割边证明过程相似"></a>请自己尝试证明，方法与割边证明过程相似</h2><h2 id="P3388-模板-割点-代码实现："><a href="#P3388-模板-割点-代码实现：" class="headerlink" title="P3388[模板]割点 代码实现："></a><a href="https://www.luogu.org/problem/P3388" target="_blank" rel="noopener">P3388[模板]割点</a> 代码实现：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,rt; <span class="comment">// rt--root</span></span><br><span class="line"><span class="keyword">int</span> cnt,num;</span><br><span class="line"><span class="keyword">int</span> h[N],ver[N&lt;&lt;<span class="number">1</span>],nxt[N&lt;&lt;<span class="number">1</span>]; <span class="comment">// 邻接表建图</span></span><br><span class="line"><span class="keyword">int</span> dfn[N],low[N]; <span class="comment">// 相应的dfn、追溯值</span></span><br><span class="line"><span class="keyword">bool</span> cut[N]; <span class="comment">// 判断是否为割点</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    ver[++cnt]=v,nxt[cnt]=h[u],h[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Tarjan</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    dfn[x]=low[x]=++num;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=h[x];i;i=nxt[i])&#123;</span><br><span class="line">        <span class="keyword">int</span> y=ver[i];</span><br><span class="line">        <span class="keyword">if</span>(!dfn[y])&#123;</span><br><span class="line">            <span class="keyword">int</span> flag=<span class="number">0</span>;</span><br><span class="line">            Tarjan(y); <span class="comment">// 递归搜边</span></span><br><span class="line">            low[x]=min(low[x],low[y]); <span class="comment">// 更新low[x]</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(low[y]&gt;=dfn[x])&#123;</span><br><span class="line">                flag++;</span><br><span class="line">                <span class="keyword">if</span>(x!=rt || flag&gt;<span class="number">1</span>) cut[x]=<span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> low[x]=min(low[x],dfn[y]); <span class="comment">// (x,y)不是搜索树上的边</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    n=read(),m=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> x,y;</span><br><span class="line">        x=read(),y=read();</span><br><span class="line">        <span class="keyword">if</span>(x==y) <span class="keyword">continue</span>;</span><br><span class="line">        add(x,y),add(y,x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">if</span>(!dfn[i]) rt=i,Tarjan(i);</span><br><span class="line">    <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">if</span>(cut[i]) sum++;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;sum&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(cut[i]) <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="无向图Tarjan经典例题"><a href="#无向图Tarjan经典例题" class="headerlink" title="无向图Tarjan经典例题"></a>无向图Tarjan经典例题</h2><h3 id="BZOJ-1123-BLO"><a href="#BZOJ-1123-BLO" class="headerlink" title="[BZOJ-1123]BLO"></a><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=1123" target="_blank" rel="noopener">[BZOJ-1123]BLO</a></h3><p><a href="https://www.luogu.org/problem/P3469" target="_blank" rel="noopener">你谷链接</a></p>
+<blockquote>
+<p>题面：</p>
+</blockquote>
+<p>给定一张无向图，求每个点被封锁之后有多少个<strong>有序</strong>点对(x,y)(x!=y,1&lt;=x,y&lt;=n)满足x无法到达y</p>
+<p>你需要输出$n$个整数，其中第$i$个整数表示把与节点$i$关联的所有边去掉之后(不去掉节点$i$本身)，无向图中有多少个有序点对$(x,y)$，满足$x$和$y$不连通</p>
+<p>$N \leq 10^5, M \leq 10^5$</p>
+<blockquote>
+<p>解法：</p>
+</blockquote>
+<p>根据割点的定义</p>
+<p>若$i$不是割点，那么删边操作之后，只有$i$与其他$n-1$个节点不同，对答案贡献为$2*(n-1)$</p>
+<p>若$i$是割点，那么删边操作之后，图分成若干连通块。求出这些连通块的大小，两两相乘再相加。设在搜索树上，节点$i$的子节点集合中，有$t$个点满足$dfn[i]&lt;=low[s_k]$。<br>于是删除$i$关联的所有边之后，无向图至多分成$t+2$个连通块，每个连通块节点构成情况为：</p>
+<ol>
+<li>节点$i$自身单独构成一个连通块</li>
+<li>有$t$个连通块，分别由<strong>搜索树上</strong>以$s_k$($1 \leq k \leq t$)为根的子树中的节点构成</li>
+<li>可能还有一个连通块，由除了上述节点之外的所有点构成</li>
+</ol>
+<p>因此可以在$Tarjan$算法执行DFS的过程中，求出搜索树每棵”子树”的大小$size[x]$。<br>那么删除割点i之后，不连通的有序对数量为： </p>
+<p>$\Sigma _{i=1}^t$ $size[s_i]*(n-size[s_i])$ $+$ $(n-1)+(n-1- \Sigma _{k=1}^t size[s_k])$ * $(1+ \Sigma _{k=1}^t size[s_k])$</p>
+<blockquote>
+<p>代码实现：</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">10</span>,M=<span class="number">5e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,cnt,num;</span><br><span class="line"><span class="keyword">int</span> h[N],ver[M&lt;&lt;<span class="number">1</span>],nxt[M&lt;&lt;<span class="number">1</span>]; <span class="comment">// 邻接表</span></span><br><span class="line"><span class="keyword">int</span> dfn[N],low[N],siz[N],ans[N];</span><br><span class="line"><span class="keyword">bool</span> cut[N]; <span class="comment">// 割点判定</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)) f=(ch==<span class="string">'-'</span>)?<span class="number">-1</span>:<span class="number">1</span>,ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch)) x=x*<span class="number">10</span>+(ch-<span class="string">'0'</span>),ch=getchar();</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    ver[++cnt]=v,nxt[cnt]=h[u],h[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    siz[x]=<span class="number">1</span>;</span><br><span class="line">    dfn[x]=low[x]=++num;</span><br><span class="line">    <span class="keyword">int</span> flag=<span class="number">0</span>,sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=h[x];i;i=nxt[i])&#123;</span><br><span class="line">        <span class="keyword">int</span> y=ver[i];</span><br><span class="line">        <span class="keyword">if</span>(!dfn[y])&#123;</span><br><span class="line">            tarjan(y);</span><br><span class="line">            siz[x]+=siz[y];</span><br><span class="line">            low[x]=min(low[x],low[y]);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(low[y]&gt;=dfn[x])&#123;</span><br><span class="line">                flag++;</span><br><span class="line">                ans[x]+=siz[y]*(n-siz[y]);</span><br><span class="line">                sum+=siz[y];</span><br><span class="line">                <span class="keyword">if</span>(x!=<span class="number">1</span> || flag&gt;<span class="number">1</span>) cut[x]=<span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> low[x]=min(low[x],dfn[y]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(cut[x]) ans[x]+=(n-sum<span class="number">-1</span>)*(sum+<span class="number">1</span>)+(n<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">else</span> ans[x]=<span class="number">2</span>*(n<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    n=read(),m=read();</span><br><span class="line">    cnt=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> x,y;</span><br><span class="line">        x=read(),y=read();</span><br><span class="line">        <span class="keyword">if</span>(x==y) <span class="keyword">continue</span>;</span><br><span class="line">        add(x,y),add(y,x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// cerr&lt;&lt;"fuck"&lt;&lt;endl;</span></span><br><span class="line">    tarjan(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans[i]&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Part2-有向图的缩点"><a href="#Part2-有向图的缩点" class="headerlink" title="$Part2$ 有向图的缩点"></a>$Part2$ 有向图的缩点</h1><h2 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h2><p>给定有向图$G=(V,E)$，若存在$r \in V$，满足从$r$出发可以到达所有的节点，那么$G$是一张<strong>流图</strong>，钦定$r$为源点</p>
+<p>在一张流图上从$r$开始DFS，也可以生成流图的搜索树，对应的有<strong>时间戳</strong>$dfn[x]$</p>
+<p>流图中的每条有向边$(x,y)$必然是以下四种之一：</p>
+<ol>
+<li>树枝边，即搜索树中的边，即$x$是$y$的父节点</li>
+<li>前向边，即搜索树中$x$是$y$的祖先节点</li>
+<li>后向边</li>
+<li>横叉边，一定满足$dfn[y]&lt;dfn[x]$</li>
+</ol>
+<h2 id="强连通分量"><a href="#强连通分量" class="headerlink" title="强连通分量"></a>强连通分量</h2><p>给定一个有向图，若对于图中任意两个节点$x,y$都能相互到达，那么称该图为<strong>强连通图</strong>。</p>
+<p>有向图的极大强连通子图成为强连通分量<strong>SCC</strong></p>
+<p>如果$x$，$y$可以相互到达，那么肯定在一个环中</p>
+<ul>
+<li>通过一条后向边，那么就满足一个环的成立</li>
+<li>如果$x$，$y$之间有一条横叉边，那么就要视情况而定，如果从$y$出发可以找到一条返回$x$的祖先的路径，那么这条边也是有用的</li>
+</ul>
+<p>为了找后向边和横叉边构成的环，Tarjan算法在DFS的同时维护了一个栈。当访问到节点$x$，需要记录一下两类节点：</p>
+<ol>
+<li>搜索树上$x$的祖先节点，记为集合$anc(x)$，设$y \in anc(x)$。若存在后向边(x,y)，则$(x,y)$和$y$到$x$的路径一起形成环。</li>
+<li>已经访问过，并且存在一条路径到达$anc(x)$的节点。</li>
+</ol>
+<p>设$z$是这样的一个点，从$z$出发存在一条路径到达$y \in anc(x)$。若存在横叉边$(x,z)$，则上述的边形成一个环</p>
+<h3 id="追溯值"><a href="#追溯值" class="headerlink" title="追溯值"></a>追溯值</h3><p>设$subtree(x)$表示流图的搜索树中以$x$为根的子树。$x$的追溯值$low[x]$定义为满足以下条件节点的最小时间戳：</p>
+<ol>
+<li>该点在栈中</li>
+<li>存在一条从$subtree(x)$出发的有向边|后向边，以该点为终点</li>
+</ol>
+<p>根据定义，Tarjan算法按照一下步骤计算追溯值：</p>
+<ol>
+<li>当节点第一次被访问时，把$x$入栈，初始化$low[x]=dfn[x]$</li>
+<li>扫描从$x$出发的每条边$(x,y)$。<ol>
+<li>若$y$没被访问过，说明(x,y)是树枝边，递归访问$y$，从$y$回溯之后，令$low[x]=min(low[x],low[y])$。</li>
+<li>若$y$被访问过并且$y$在栈中，则令$low[x]=min(low[x],dfn[y])$</li>
+</ol>
+</li>
+<li>从$x$回溯之前，判断是否有$low[x]=dfn[x]$。若成立，则不断从栈中弹出节点知道$x$出栈</li>
+</ol>
+<h2 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">10</span>,M=<span class="number">1e6</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> ver[M],nxt[M],h[N];</span><br><span class="line"><span class="keyword">int</span> dfn[N],low[N];</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">stack</span>[N],ins[N],c[N];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;SCC[N];</span><br><span class="line"><span class="keyword">int</span> n,m,cnt,num,top,tot;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)) f=(ch==<span class="string">'-'</span>)?<span class="number">-1</span>:<span class="number">1</span>,ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch)) x=x*<span class="number">10</span>+(ch-<span class="string">'0'</span>),ch=getchar();</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    ver[++cnt]=v,nxt[cnt]=h[u],h[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    dfn[x]=low[x]=++num;</span><br><span class="line">    <span class="built_in">stack</span>[++top]=x,ins[x]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=h[u];i;i=nxt[i])&#123;</span><br><span class="line">        <span class="keyword">int</span> y=ver[i];</span><br><span class="line">        <span class="keyword">if</span>(!dfn[y])&#123;</span><br><span class="line">            tarjan(y);</span><br><span class="line">            low[x]=min(low[x],low[y]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(ins[y])</span><br><span class="line">            low[x]=min(low[x],dfn[y]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(dfn[x]==low[x])&#123;</span><br><span class="line">        tot++,y=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            y=<span class="built_in">stack</span>[top--],ins[y]=<span class="number">0</span>;</span><br><span class="line">            c[y]=tot,SCC[tot].push_back(y);</span><br><span class="line">        &#125;<span class="keyword">while</span>(x!=y)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    n=read(),m=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> x,y;</span><br><span class="line">        x=read(),y=read();</span><br><span class="line">        add(x,y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!dfn[i]) tarjan(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+            
+              <a href="/tags/Tarjan/" rel="tag"># Tarjan</a>
+            
+              <a href="/tags/强连通分量/" rel="tag"># 强连通分量</a>
+            
+              <a href="/tags/割点/" rel="tag"># 割点</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/10/24/OI/学习笔记/manacher/" rel="next" title="Manacher">
+                  <i class="fa fa-chevron-left"></i> Manacher
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/10/24/OI/学习笔记/二分图匹配/" rel="prev" title="基础二分图">
+                  基础二分图 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Part1-无向图的割点-割边"><span class="nav-number">1.</span> <span class="nav-text">$Part1$ 无向图的割点\割边</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前置知识："><span class="nav-number">1.2.</span> <span class="nav-text">前置知识：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#割边的判定："><span class="nav-number">1.3.</span> <span class="nav-text">割边的判定：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明："><span class="nav-number">1.4.</span> <span class="nav-text">证明：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些问题以及解决方法"><span class="nav-number">1.5.</span> <span class="nav-text">一些问题以及解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#割点的判定："><span class="nav-number">1.6.</span> <span class="nav-text">割点的判定：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请自己尝试证明，方法与割边证明过程相似"><span class="nav-number">1.7.</span> <span class="nav-text">请自己尝试证明，方法与割边证明过程相似</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P3388-模板-割点-代码实现："><span class="nav-number">1.8.</span> <span class="nav-text">P3388[模板]割点 代码实现：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无向图Tarjan经典例题"><span class="nav-number">1.9.</span> <span class="nav-text">无向图Tarjan经典例题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BZOJ-1123-BLO"><span class="nav-number">1.9.1.</span> <span class="nav-text">[BZOJ-1123]BLO</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Part2-有向图的缩点"><span class="nav-number">2.</span> <span class="nav-text">$Part2$ 有向图的缩点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义-1"><span class="nav-number">2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强连通分量"><span class="nav-number">2.2.</span> <span class="nav-text">强连通分量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#追溯值"><span class="nav-number">2.2.1.</span> <span class="nav-text">追溯值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现："><span class="nav-number">2.3.</span> <span class="nav-text">代码实现：</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images\header.jpeg"
+      alt="SYH">
+  <p class="site-author-name" itemprop="name">SYH</p>
+  <div class="site-description" itemprop="description">SYH'Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/wyctstf" title="GitHub &rarr; https://github.com/wyctstf" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友链
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.gmh-home.cf/" title="http://www.gmh-home.cf/" rel="noopener" target="_blank">G M H</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.org/blog/user53410/" title="https://www.luogu.org/blog/user53410/" rel="noopener" target="_blank">XY</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SYH</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+</body>
+</html>
