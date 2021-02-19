@@ -10,17 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 3.9.0">
-
-<script>
-    (function(){
-        if(''){
-            if (prompt('请输入文章密码') !== ''){
-                alert('密码错误！');
-                history.back();
-            }
-        }
-    })();
-</script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
@@ -39,7 +28,7 @@
     scheme: 'Gemini',
     version: '7.4.1',
     exturl: false,
-    sidebar: {"position":"left","width":230,"display":"post","offset":12},
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
     copycode: {"enable":true,"show_result":true,"style":"mac"},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -67,7 +56,7 @@
 </script>
 
   <meta name="description" content="点开洛谷模板题一看原来是抄了题解，吓得赶紧重新学习">
-<meta name="keywords" content="贪心,算法模板,学习笔记,最小生成树,图论,并查集">
+<meta name="keywords" content="算法模板,学习笔记,贪心,最小生成树,图论,并查集">
 <meta property="og:type" content="article">
 <meta property="og:title" content="最小生成树">
 <meta property="og:url" content="http://yoursite.com/2020/10/24/OI/学习笔记/最小生成树/index.html">
@@ -308,8 +297,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>点开洛谷模板题一看原来是抄了题解，吓得赶紧重新学习</p>
-<a id="more"></a>
+        <p>点开洛谷模板题一看原来是抄了题解，吓得赶紧重新学习<br><a id="more"></a></p>
 <h1 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h1><p>最小生成树(MST)是指在一个节点数量为n的<strong>无向图</strong>中的一个由<strong>n-1</strong>条边构成的<strong>连通子图</strong>并且<strong>边权和最小</strong></p>
 <h1 id="Kruskal算法："><a href="#Kruskal算法：" class="headerlink" title="Kruskal算法："></a>Kruskal算法：</h1><h2 id="算法思路："><a href="#算法思路：" class="headerlink" title="算法思路："></a>算法思路：</h2><p>对所有边进行排序，用并查集维护连通性，从小到大选择边，判断是否构成一个环，如果不是则加入，否则放弃</p>
 <h2 id="算法流程："><a href="#算法流程：" class="headerlink" title="算法流程："></a>算法流程：</h2><ol>
@@ -317,10 +305,8 @@
 </li>
 <li><p>所有边的边权按照权值从小到大排序，依次扫描每一条边(x,y,z)</p>
 </li>
-<li><p>如果x,y属于同一集合，那么忽略这条边</p>
-</li>
-<li><p>否则合并x,y，把z累加到答案中</p>
-</li>
+<li>如果x,y属于同一集合，那么忽略这条边</li>
+<li>否则合并x,y，把z累加到答案中</li>
 </ol>
 <p>所有的边扫描完成之后，就构成了一棵MST</p>
 <p>时间复杂度为O(m logm)</p>
@@ -351,11 +337,11 @@
           
           <div class="post-tags">
             
-              <a href="/tags/贪心/" rel="tag"># 贪心</a>
-            
               <a href="/tags/算法模板/" rel="tag"># 算法模板</a>
             
               <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+            
+              <a href="/tags/贪心/" rel="tag"># 贪心</a>
             
               <a href="/tags/最小生成树/" rel="tag"># 最小生成树</a>
             
@@ -448,7 +434,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -461,7 +447,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -481,37 +467,8 @@
     
   </nav>
 </div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://github.com/wyctstf" title="GitHub &rarr; https://github.com/wyctstf" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-    
-  </div>
 
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      友链
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://www.gmh-home.cf/" title="http://www.gmh-home.cf/" rel="noopener" target="_blank">G M H</a>
-        </li>
-      
-        <li class="links-of-blogroll-item">
-          <a href="https://www.luogu.org/blog/user53410/" title="https://www.luogu.org/blog/user53410/" rel="noopener" target="_blank">XY</a>
-        </li>
-      
-    </ul>
-  </div>
 
       </div>
 
@@ -591,8 +548,6 @@
 
 
 
-
-  
 
   
 

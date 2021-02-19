@@ -10,17 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 3.9.0">
-
-<script>
-    (function(){
-        if(''){
-            if (prompt('请输入文章密码') !== ''){
-                alert('密码错误！');
-                history.back();
-            }
-        }
-    })();
-</script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
@@ -39,7 +28,7 @@
     scheme: 'Gemini',
     version: '7.4.1',
     exturl: false,
-    sidebar: {"position":"left","width":230,"display":"post","offset":12},
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
     copycode: {"enable":true,"show_result":true,"style":"mac"},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -327,14 +316,12 @@
       
         <p>给定一个$N$，N可以除以因子，问得到$1$需要的期望步数</p>
 <a id="more"></a>
-
 <h2 id="题面"><a href="#题面" class="headerlink" title="题面"></a>题面</h2><p><a href="https://vjudge.net/problem/LightOJ-1038" target="_blank" rel="noopener">题目</a>含义见上</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>设$dp[i]$表示当前数字为$i$，变到$1$需要的期望步数</p>
-<p>例：<br>$$dp[8] = \frac {(dp[1]+dp[2]+dp[4]+dp[8])}{4}+1$$</p>
-<p>化简可得<br>$$dp[8] = \frac {(dp[1]+dp[2]+dp[4]+4)}{3}$$</p>
-<p>这样就可以递推求解$dp[n]$</p>
-<p>$$dp[n]=\frac {\Sigma_{i=1}^{k}dp[c[i]] + k}{k-1}$$</p>
-<p>其中$k$是$n$的因子个数，$c[i]$是n的因子</p>
+<p>例：</p>
+<script type="math/tex; mode=display">dp[8] = \frac {(dp[1]+dp[2]+dp[4]+dp[8])}{4}+1</script><p>化简可得</p>
+<script type="math/tex; mode=display">dp[8] = \frac {(dp[1]+dp[2]+dp[4]+4)}{3}</script><p>这样就可以递推求解$dp[n]$</p>
+<script type="math/tex; mode=display">dp[n]=\frac {\Sigma_{i=1}^{k}dp[c[i]] + k}{k-1}</script><p>其中$k$是$n$的因子个数，$c[i]$是n的因子</p>
 <h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> t,n;</span><br><span class="line"><span class="keyword">double</span> f[<span class="number">100010</span>];</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">dp</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(f[x]) <span class="keyword">return</span> f[x];</span><br><span class="line">    <span class="keyword">double</span> tmp=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> num=<span class="number">0</span>,i=<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(;i*i&lt;x;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(x%i==<span class="number">0</span>)&#123;</span><br><span class="line">            tmp+=dp(i);</span><br><span class="line">            tmp+=dp(x/i);</span><br><span class="line">            num+=<span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(i*i==x) tmp+=dp(i), num++;</span><br><span class="line">    tmp+=dp(<span class="number">1</span>),num++;</span><br><span class="line">    <span class="keyword">return</span> f[x]=(tmp+num+<span class="number">1</span>)/num;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">    <span class="keyword">int</span> Case=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=<span class="number">100010</span>;i++)&#123;</span><br><span class="line">        dp(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case %d: %.10lf\n"</span>,++Case,f[n]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
@@ -439,7 +426,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -452,7 +439,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -472,37 +459,8 @@
     
   </nav>
 </div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://github.com/wyctstf" title="GitHub &rarr; https://github.com/wyctstf" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-    
-  </div>
 
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      友链
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://www.gmh-home.cf/" title="http://www.gmh-home.cf/" rel="noopener" target="_blank">G M H</a>
-        </li>
-      
-        <li class="links-of-blogroll-item">
-          <a href="https://www.luogu.org/blog/user53410/" title="https://www.luogu.org/blog/user53410/" rel="noopener" target="_blank">XY</a>
-        </li>
-      
-    </ul>
-  </div>
 
       </div>
 
@@ -583,60 +541,6 @@
 
 
 
-  
-
-  
-    
-      
-<script type="text/x-mathjax-config">
-    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        extensions: ['[mhchem]/mhchem.js'],
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
   
 
   

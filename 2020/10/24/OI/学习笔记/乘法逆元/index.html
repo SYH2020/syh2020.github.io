@@ -10,17 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 3.9.0">
-
-<script>
-    (function(){
-        if(''){
-            if (prompt('请输入文章密码') !== ''){
-                alert('密码错误！');
-                history.back();
-            }
-        }
-    })();
-</script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
@@ -39,7 +28,7 @@
     scheme: 'Gemini',
     version: '7.4.1',
     exturl: false,
-    sidebar: {"position":"left","width":230,"display":"post","offset":12},
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
     copycode: {"enable":true,"show_result":true,"style":"mac"},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -327,19 +316,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>顾名思义，就是模意义下乘法运算的逆元</p>
-<a id="more"></a>
+        <p>顾名思义，就是模意义下乘法运算的逆元<br><a id="more"></a></p>
 <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>如果一个线性同余方程$ax\equiv 1\ (mod \ b)$，则$x$称为$a$对$b$的逆元，记作$a^{-1}$</p>
 <h2 id="Section1-扩欧"><a href="#Section1-扩欧" class="headerlink" title="Section1 - 扩欧"></a>Section1 - 扩欧</h2><blockquote>
 <p>本质和解线性同余方程一样</p>
 </blockquote>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> &amp;x,<span class="keyword">int</span> &amp;y)</span></span>&#123; <span class="comment">// 扩欧可以返回ax+by=gcd(a,b)的一组整数解</span></span><br><span class="line">    <span class="keyword">if</span>(!b)&#123;x=<span class="number">1</span>,y=<span class="number">0</span>;<span class="keyword">return</span> a; <span class="comment">// 返回特解x=1,y=0并正常的求解gcd</span></span><br><span class="line">    <span class="keyword">int</span> res=exgcd(b,a%b,x,y);</span><br><span class="line">    <span class="keyword">int</span> tmp=x;</span><br><span class="line">    x=y,t=tmp-(a/b)*y;</span><br><span class="line">    <span class="keyword">return</span> res; <span class="comment">// 同时返回gcd值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="title">exgcd_inv</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> d,x,y;</span><br><span class="line">    d=exgcd(a,n,x,y);</span><br><span class="line">    <span class="keyword">return</span> d==<span class="number">1</span>?(x+n)%n:<span class="number">-1</span>; <span class="comment">// -1表示没有乘法逆元</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="Section2-费马小定理"><a href="#Section2-费马小定理" class="headerlink" title="Section2 - 费马小定理"></a>Section2 - 费马小定理</h2><blockquote>
-<p>当$p$为质数时(使用条件)，有$a^{p-1}\equiv 1 \ (mod \ p)$，可变为$a*a^{p-2} \equiv 1 \ (mod \ p)$，此时$a^{p-2}就是$a$对$p$的乘法逆元$</p>
+<p>当$p$为质数时(使用条件)，有$a^{p-1}\equiv 1 \ (mod \ p)$，可变为$a*a^{p-2} \equiv 1 \ (mod \ p)$，此时$a^{p-2}就是$a$对$p$的乘法逆元$<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">QuickPow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=b;</span><br><span class="line">    <span class="keyword">for</span>(;a;a&gt;&gt;=<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a&amp;<span class="number">1</span>)</span><br><span class="line">            ans=(ans*b%p);</span><br><span class="line">        ans=ans*ans%p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fermat_inv</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> QuickPow(a,n<span class="number">-2</span>,n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">QuickPow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=b;</span><br><span class="line">    <span class="keyword">for</span>(;a;a&gt;&gt;=<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a&amp;<span class="number">1</span>)</span><br><span class="line">            ans=(ans*b%p);</span><br><span class="line">        ans=ans*ans%p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fermat_inv</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> QuickPow(a,n<span class="number">-2</span>,n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>还有一种线性筛逆元的解法，等哪天有时间补上，先复习初赛续命…</p>
 <hr>
 <p><a href="https://www.luogu.org/problem/P1082" target="_blank" rel="noopener">模板1</a></p>
@@ -375,8 +360,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2020/10/24/OI/学习笔记/二分图匹配/" rel="next" title="基础二分图">
-                  <i class="fa fa-chevron-left"></i> 基础二分图
+                <a href="/2020/10/24/OI/学习笔记/Tarjan/" rel="next" title="Tarjan杂谈">
+                  <i class="fa fa-chevron-left"></i> Tarjan杂谈
                 </a>
               
             </div>
@@ -385,8 +370,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2020/10/24/OI/学习笔记/初级线段树/" rel="prev" title="初级线段树">
-                  初级线段树 <i class="fa fa-chevron-right"></i>
+                <a href="/2020/10/24/OI/学习笔记/二分图匹配/" rel="prev" title="基础二分图">
+                  基础二分图 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -452,7 +437,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -465,7 +450,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -485,37 +470,8 @@
     
   </nav>
 </div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://github.com/wyctstf" title="GitHub &rarr; https://github.com/wyctstf" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-    
-  </div>
 
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      友链
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://www.gmh-home.cf/" title="http://www.gmh-home.cf/" rel="noopener" target="_blank">G M H</a>
-        </li>
-      
-        <li class="links-of-blogroll-item">
-          <a href="https://www.luogu.org/blog/user53410/" title="https://www.luogu.org/blog/user53410/" rel="noopener" target="_blank">XY</a>
-        </li>
-      
-    </ul>
-  </div>
 
       </div>
 
@@ -596,60 +552,6 @@
 
 
 
-  
-
-  
-    
-      
-<script type="text/x-mathjax-config">
-    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        extensions: ['[mhchem]/mhchem.js'],
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
   
 
   

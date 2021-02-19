@@ -10,17 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 3.9.0">
-
-<script>
-    (function(){
-        if(''){
-            if (prompt('请输入文章密码') !== ''){
-                alert('密码错误！');
-                history.back();
-            }
-        }
-    })();
-</script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
@@ -39,7 +28,7 @@
     scheme: 'Gemini',
     version: '7.4.1',
     exturl: false,
-    sidebar: {"position":"left","width":230,"display":"post","offset":12},
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
     copycode: {"enable":true,"show_result":true,"style":"mac"},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -327,7 +316,6 @@
       
         <p>复习一波手写二叉堆的模板，以免初赛碰到没认出来导致场面一度尴尬</p>
 <a id="more"></a>
-
 <p>这篇<a href="https://www.cnblogs.com/henry-1202/p/9307927.html" target="_blank" rel="noopener">博客</a>写的还是不错的</p>
 <h2 id="操作："><a href="#操作：" class="headerlink" title="操作："></a>操作：</h2><h3 id="插入："><a href="#插入：" class="headerlink" title="插入："></a>插入：</h3><p>将一个元素放到堆尾，比较和父节点的大小不断进行交换，一直到不满足条件为止</p>
 <h3 id="查询："><a href="#查询：" class="headerlink" title="查询："></a>查询：</h3><p>直接输出堆顶，正常情况下我们都使用数组保存二叉树所以直接输出heap[1]即可</p>
@@ -436,7 +424,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -449,7 +437,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -469,37 +457,8 @@
     
   </nav>
 </div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://github.com/wyctstf" title="GitHub &rarr; https://github.com/wyctstf" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-    
-  </div>
 
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      友链
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://www.gmh-home.cf/" title="http://www.gmh-home.cf/" rel="noopener" target="_blank">G M H</a>
-        </li>
-      
-        <li class="links-of-blogroll-item">
-          <a href="https://www.luogu.org/blog/user53410/" title="https://www.luogu.org/blog/user53410/" rel="noopener" target="_blank">XY</a>
-        </li>
-      
-    </ul>
-  </div>
 
       </div>
 
@@ -579,8 +538,6 @@
 
 
 
-
-  
 
   
 
